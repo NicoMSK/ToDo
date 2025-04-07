@@ -1,0 +1,165 @@
+@use "/src/styles/common/variables.scss" as *;
+@use "/src/styles/common/fonts" as *;
+@use "/src/styles/common/mixin" as *;
+
+.hero__container {
+  padding: 30px 125px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__item {
+  padding: 20px 0;
+  display: flex;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  color: $black;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba($purple, 0.5);
+  }
+}
+
+.hero__img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero__btn-wrapper {
+  margin-left: auto;
+  display: flex;
+  gap: 13px;
+  opacity: 0;
+}
+
+.hero__btn-edit,
+.hero__btn-delete {
+  @include button-reset;
+
+  width: 18px;
+  height: 18px;
+  background-color: #cdcdcd;
+}
+
+.hero__btn-edit {
+  mask-image: url("/src/icons/sprite.svg#fix");
+
+  &:hover {
+    background-color: $purple;
+  }
+}
+
+.hero__btn-delete {
+  mask-image: url("/src/icons/sprite.svg#delete");
+
+  &:hover {
+    background-color: #e50000;
+  }
+}
+
+.hero__item:hover .hero__btn-wrapper {
+  opacity: 1;
+}
+
+.hero__label {
+  display: flex;
+  cursor: pointer;
+}
+
+.hero__input {
+  margin-right: 17px;
+  width: 26px;
+  height: 26px;
+  flex: 1 0 auto;
+  border: 1px solid $purple;
+  border-radius: 2px;
+  appearance: none;
+  position: relative;
+  left: 0;
+  transition: 500ms;
+  cursor: pointer;
+
+  &:checked {
+    background-color: $purple;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 4px;
+    background-image: url("/src/icons/sprite.svg#arrow-checkbox");
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 500ms;
+  }
+}
+
+.hero__input:checked + span {
+  font-weight: 400;
+  color: rgba(37, 37, 37, 0.5);
+  text-decoration: line-through;
+}
+
+.hero__btn-cancel {
+  @include button-reset;
+
+  margin-top: auto;
+  padding: 5px 27px 5px 7px;
+  max-width: 155px;
+  font-family: $third-font;
+  font-weight: 400;
+  position: fixed;
+  right: calc(60vw - 5px);
+  bottom: 32px;
+  border: 2px solid $purple;
+  border-radius: 4px;
+  background: #534cc2;
+  text-transform: uppercase;
+  color: #fff;
+  background-image: url("/src/icons/sprite.svg#arrow");
+  background-size: 15px 14px;
+  background-repeat: no-repeat;
+  background-position: 95%;
+
+  &:hover {
+    background-color: $purple;
+  }
+}
+
+.hero__btn-count {
+  padding: 0 7px;
+  font-weight: 700;
+}
+
+.hero__btn-add {
+  @include button-reset;
+
+  margin-left: auto;
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: calc(50vw - 372px);
+  bottom: 32px;
+  box-shadow: 0 0 4px 0 $purple;
+  background-color: $purple;
+  border-radius: 100%;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    left: 12px;
+    background-image: url("/src/icons/sprite.svg#add");
+  }
+
+  &:hover {
+    background-color: #534cc2;
+  }
+}

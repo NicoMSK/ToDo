@@ -19,6 +19,7 @@
   background-size: 21px 21px;
   background-position: 98%;
   background-repeat: no-repeat;
+  outline: none;
 }
 
 .nav__input--light-theme {
@@ -27,6 +28,10 @@
 
   &::placeholder {
     color: #c3c1e5;
+  }
+
+  &:focus-visible {
+    box-shadow: 4px 5px 24px rgba(108, 99, 255, 0.2);
   }
 }
 

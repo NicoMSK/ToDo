@@ -1,0 +1,105 @@
+@use "/src/styles/common/variables.scss" as *;
+@use "/src/styles/common/fonts" as *;
+@use "/src/styles/common/mixin" as *;
+
+.dialog {
+  padding: 18px 30px;
+  width: 500px;
+  inset: 0;
+  position: fixed;
+  background-color: $white;
+  border: none;
+  border-radius: 16px;
+  z-index: 99;
+
+  &::backdrop {
+    position: fixed;
+    inset: 0px;
+    background: rgba(37, 37, 37, 0.7);
+    backdrop-filter: blur(10px);
+  }
+
+  &--dark {
+    color: $white;
+    background-color: $black;
+  }
+}
+
+.dialog__title {
+  margin: 0;
+  margin-bottom: 25px;
+  padding: 0;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.dialog__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog__input {
+  margin-bottom: 128px;
+  padding: 8px 16px;
+  background-color: inherit;
+  border: 1px solid $purple;
+  border-radius: 5px;
+  outline: none;
+
+  &--dark {
+    border: 1px solid $white;
+  }
+
+  &::placeholder {
+    font-family: $second-font;
+    font-weight: 500;
+    line-height: 100%;
+    color: #c3c1e5;
+  }
+
+  &:focus-visible {
+    box-shadow: 4px 5px 24px rgba(108, 99, 255, 0.2);
+  }
+}
+
+.dialog__input--dark::placeholder {
+  font-family: $second-font;
+  font-weight: 500;
+  line-height: 100%;
+  color: #666;
+}
+
+.dialog__btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog__btn {
+  @include button-reset;
+
+  padding: 10px 22px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: $purple;
+  background-color: inherit;
+  border: 1px solid $purple;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: rgba(108, 99, 255, 0.2);
+  }
+
+  &--add {
+    color: $white;
+    background-color: $purple;
+
+    &:hover {
+      background-color: #534cc2;
+    }
+  }
+}
