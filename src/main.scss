@@ -1,23 +1,14 @@
-@font-face {
-  font-family: "Raleway";
-  src: url("/src/fonts/Raleway/Raleway-Regular.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+/* GLOBAL */
+@use "./styles/common/variables.scss";
+@use "./styles/common/mixin.scss";
+@use "./styles/common/fonts.scss";
+@use "./styles/common/global.scss";
+@use "./styles/common/visually-hidden.scss";
 
-@font-face {
-  font-family: "Raleway";
-  src: url("/src/fonts/Raleway/Raleway-Bold.woff2") format("woff2");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
+/* BLOCKS */
 
-html {
-  font-family: "Raleway";
-  background-color: rgb(43, 115, 91);
-}
-p {
-  color: azure;
-}
+@use "./styles/blocks/page.scss";
+@use "./styles/blocks/container.scss";
+@use "./styles/blocks/header.scss";
+@use "./styles/blocks/nav.scss";
+@use "./styles/blocks/hero.scss";

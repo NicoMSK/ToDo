@@ -7,28 +7,28 @@
   <title>ToDo</title>
 </head>
 
-<body class="page__body">
+<body class="page__body page__body--light-theme">
   <header class="header">
     <div class="header__container container">
       <h1 class="header__title">TODO LIST</h1>
       <nav class="header__nav nav">
-        <search>
+        <search class="nav__search">
           <form action="" method="get">
-            <input class="nav__search" type="search">
+            <input class="nav__input nav__input--light-theme " type="search" placeholder="Поиск заметки...">
           </form>
         </search>
         <div class="nav__select-wrapper">
           <button class="nav__select-btn" type="button" data-select="toggle" data-index="-1"></button>
           <div class="nav__select-box">
             <ul class="nav__select-list">
-              <li class="nav__select-item" data-select="optinon" data-value="all" data-index="0">ВСЕ</li>
+              <li class="nav__select-item" data-select="optinon" data-value="all" data-index="0">Все</li>
               <li class="nav__select-item" data-select="optinon" data-value="complete" data-index="1">Завершено</li>
-              <li class="nav__select-item" data-select="optinon" data-value="incomplete" data-index="2">Не завершено
+              <li class="nav__select-item" data-select="optinon" data-value="incomplete" data-index="2">В планах
               </li>
             </ul>
           </div>
         </div>
-        <button class="nav__theme-btn" type="button">
+        <button class="nav__theme-btn nav__theme-btn--light" type="button">
           <span class="visually-hidden">Сменить тему</span>
         </button>
       </nav>
@@ -76,8 +76,8 @@
           </li>
         </ul>
         <div class="hero__img-wrapper">
-          <img class="hero__img" src="images/detective.png" srcset="images/detective@2x.png 2x" width="221" height="174"
-            alt="Детектив с лупой идёт по следам" loading="lazy">
+          <img class="hero__img visually-hidden" src="images/detective.png" srcset="images/detective@2x.png 2x"
+            width="221" height="174" alt="Детектив с лупой идёт по следам" loading="lazy">
         </div>
         <button class="hero__btn-cancel">Отменить</button>
         <button class="hero__btn-add" type="button">
@@ -85,7 +85,7 @@
         </button>
         <dialog class="hero__dialog dialog" open>
           <div class="dialog__wrapper">
-            <h2 class="dialog__title">Новая задача</h2>
+            <h2 class="dialog__title">Новая заметка</h2>
             <form class="dialog__form" action="#" method="post">
               <input class="dialog__input" type="text" aria-label="Описание задачи"
                 placeholder="Введите свою заметку..." required>
