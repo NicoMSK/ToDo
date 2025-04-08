@@ -1,19 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html class="page" lang="ru">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Быстрый запуск Webpack</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo</title>
 </head>
 
-<body>
-  <p>Файл создан плагином html-webpack-plugin</p>
-  <div class="logo-png">
-    <img class="logo1" src="./images/image.png" alt="Загрузка PNG изображений с помощью Webpack">
-  </div>
-  <div class="logo-svg">
-    <img class="logo2" src="./images/logo.svg" alt="Загрузка SVG изображений с помощью Webpack">
-  </div>
+<body class="page__body page__body--light-theme">
+  <header class="header">
+    <div class="header__container container">
+      <h1 class="header__title">TODO LIST</h1>
+      <nav class="header__nav nav">
+        <search class="nav__search">
+          <form action="" method="get">
+            <input class="nav__input nav__input--light-theme " type="search" placeholder="Поиск заметки...">
+          </form>
+        </search>
+        <div class="nav__select-wrapper">
+          <button class="nav__select-btn" type="button" data-select="toggle" data-index="-1"></button>
+          <div class="nav__select-box">
+            <ul class="nav__select-list">
+              <li class="nav__select-item" data-select="optinon" data-value="all" data-index="0">Все</li>
+              <li class="nav__select-item" data-select="optinon" data-value="complete" data-index="1">Завершено</li>
+              <li class="nav__select-item" data-select="optinon" data-value="incomplete" data-index="2">В планах
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button class="nav__theme-btn nav__theme-btn--light" type="button">
+          <span class="visually-hidden">Сменить тему</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+  <main class="page__main">
+    <section class="hero">
+      <div class="hero__container container">
+        <ul class="hero__list">
+          <li class="hero__item">
+            <label class="hero__label">
+              <input class="hero__input" type="checkbox">
+              <span class="hero__input-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique eos qui
+                quasi tempore laborum veritatis in reiciendis labore nulla, nam itaque ex odio aut hic officiis sit iure
+                debitis neque esse libero exercitationem tenetur laboriosam! Fugit similique odio ullam vitae, unde
+                necessitatibus, sed aliquid sapiente adipisci nulla dolore voluptatem deleniti.</span>
+            </label>
+            <div class="hero__btn-wrapper">
+              <button class="hero__btn-edit">
+                <span class="visually-hidden">Редактировать</span>
+              </button>
+              <button class="hero__btn-delete">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+            </div>
+          </li>
+          <li class="hero__item">
+            <label class="hero__label">
+              <input class="hero__input" type="checkbox">
+              <span class="hero__input-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis ex
+                suscipit voluptas ratione tempora doloribus nulla accusamus corporis possimus aperiam. Optio placeat
+                nostrum adipisci fugit corporis voluptatem facere nesciunt perferendis!</span>
+            </label>
+            <div class="hero__btn-wrapper">
+              <button class="hero__btn-edit">
+                <span class="visually-hidden">Редактировать</span>
+              </button>
+              <button class="hero__btn-delete">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+            </div>
+          </li>
+          <li class="hero__item">
+            <label class="hero__label">
+              <input class="hero__input" type="checkbox">
+              <span class="hero__input-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi impedit
+                culpa in reiciendis autem atque unde ad dicta maiores porro!</span>
+            </label>
+            <div class="hero__btn-wrapper">
+              <button class="hero__btn-edit">
+                <span class="visually-hidden">Редактировать</span>
+              </button>
+              <button class="hero__btn-delete">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+            </div>
+          </li>
+        </ul>
+        <div class="hero__img-wrapper visually-hidden">
+          <img class="hero__img" src="images/detective.png" srcset="images/detective@2x.png 2x" width="221" height="174"
+            alt="Детектив с лупой идёт по следам" loading="lazy">
+          <p class="hero__img-text">Тут пока пусто</p>
+        </div>
+        <button class="hero__btn-cancel visually-hidden">
+          <!-- <svg class="" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g class="">
+              <circle class="" cx="10" cy="10" r="10" />
+            </g>
+          </svg> -->
+          <span class="hero__btn-count">5</span>
+          Отменить
+        </button>
+        <button class="hero__btn-add" type="button">
+          <span class="visually-hidden">Добавить заметку</span>
+        </button>
+        <dialog class="hero__dialog dialog" aria-labelledby="dialog-name">
+          <h2 class="dialog__title" id="dialog-name">Новая заметка</h2>
+          <form class="dialog__form" action="#" method="dialog">
+            <input class="dialog__input" type="text" aria-label="Описание задачи" placeholder="Введите свою заметку..."
+              required>
+            <div class="dialog__btn-wrapper">
+              <button class="dialog__btn" type="reset">Отмена</button>
+              <button class="dialog__btn dialog__btn--add" type="submit">Добавить</button>
+            </div>
+          </form>
+        </dialog>
+      </div>
+      <template id="template">
+        <li class="hero__item">
+          <label class="hero__label">
+            <input class="hero__input" type="checkbox">
+            <span class="hero__input-text">первый</span>
+          </label>
+          <div class="hero__btn-wrapper">
+            <button class="hero__btn-edit">
+              <span class="visually-hidden">Редактировать</span>
+            </button>
+            <button class="hero__btn-delete">
+              <span class="visually-hidden">Удалить</span>
+            </button>
+          </div>
+        </li>
+      </template>
+    </section>
+  </main>
 </body>
 
 </html>

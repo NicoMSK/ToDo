@@ -1,16 +1,15 @@
-$font-size: 1rem;
-$font-color: lch(28 99 35);
+/* GLOBAL */
+@use "./styles/common/variables.scss";
+@use "./styles/common/mixin.scss";
+@use "./styles/common/fonts.scss";
+@use "./styles/common/global.scss";
+@use "./styles/common/visually-hidden.scss";
 
-html {
-  font-family: "Roboto";
-  font-size: $font-size;
-  color: $font-color;
-  background-color: aquamarine;
-}
+/* BLOCKS */
 
-.logo1 {
-  width: 10em;
-}
-.logo2 {
-  width: 10em;
-}
+@use "./styles/blocks/page.scss";
+@use "./styles/blocks/container.scss";
+@use "./styles/blocks/header.scss";
+@use "./styles/blocks/nav.scss";
+@use "./styles/blocks/hero.scss";
+@use "./styles/blocks/dialog.scss";

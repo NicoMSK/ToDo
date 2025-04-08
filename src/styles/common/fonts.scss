@@ -1,0 +1,42 @@
+@use "./mixin" as *;
+
+$main-font: "Kanit", "Arial", sans-serif;
+$second-font: "Inter", "Arial", sans-serif;
+$third-font: "Raleway", "Arial", sans-serif;
+
+@include font-face(
+  "Kanit",
+  500,
+  normal,
+  url("/src/fonts/Kanit/Kanit-Medium.woff2") format("woff2")
+);
+@include font-face(
+  "Kanit",
+  400,
+  normal,
+  url("/src/fonts/Kanit/Kanit-Regular.woff2") format("woff2")
+);
+@include font-face(
+  "Inter",
+  500,
+  normal,
+  url("/src/fonts/Inter/Inter-Medium.woff2") format("woff2")
+);
+@include font-face(
+  "Inter",
+  700,
+  normal,
+  url("/src/fonts/Inter/Inter-Bold.woff2") format("woff2")
+);
+@include font-face(
+  "Raleway",
+  400,
+  normal,
+  url("/src/fonts/Raleway/Raleway-Regular.woff2") format("woff2")
+);
+@include font-face(
+  "Raleway",
+  700,
+  normal,
+  url("/src/fonts/Raleway/Raleway-Bold.woff2") format("woff2")
+);
