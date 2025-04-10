@@ -18,7 +18,8 @@
           </form>
         </search>
         <div class="nav__select-wrapper">
-          <button class="nav__select-btn" type="button" data-select="toggle" data-index="-1"></button>
+          <button class="nav__select-btn" type="button" data-select="toggle" data-index="-1">
+          </button>
           <div class="nav__select-box">
             <ul class="nav__select-list">
               <li class="nav__select-item" data-select="optinon" data-value="all" data-index="0">Все</li>
@@ -87,12 +88,12 @@
             </div>
           </li>
         </ul>
-        <div class="hero__img-wrapper visually-hidden">
+        <div class="hero__img-wrapper hero__img-wrapper--hidden">
           <img class="hero__img" src="images/detective.png" srcset="images/detective@2x.png 2x" width="221" height="174"
             alt="Детектив с лупой идёт по следам" loading="lazy">
           <p class="hero__img-text">Тут пока пусто</p>
         </div>
-        <button class="hero__btn-cancel visually-hidden">
+        <button class="hero__btn-cancel hero__btn-cancel--hidden">
           <!-- <svg class="" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <g class="">
               <circle class="" cx="10" cy="10" r="10" />
@@ -110,17 +111,17 @@
             <input class="dialog__input" type="text" aria-label="Описание задачи" placeholder="Введите свою заметку..."
               required>
             <div class="dialog__btn-wrapper">
-              <button class="dialog__btn" type="reset">Отмена</button>
+              <button class="dialog__btn dialog__btn--close" type="reset">Отмена</button>
               <button class="dialog__btn dialog__btn--add" type="submit">Добавить</button>
             </div>
           </form>
         </dialog>
       </div>
-      <template id="template">
+      <template id="task-template">
         <li class="hero__item">
           <label class="hero__label">
             <input class="hero__input" type="checkbox">
-            <span class="hero__input-text">первый</span>
+            <span class="hero__input-text"></span>
           </label>
           <div class="hero__btn-wrapper">
             <button class="hero__btn-edit">
