@@ -42,16 +42,22 @@
           <li class="hero__item">
             <label class="hero__label">
               <input class="hero__input" type="checkbox">
-              <span class="hero__input-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique eos qui
-                quasi tempore laborum veritatis in reiciendis labore nulla, nam itaque ex odio aut hic officiis sit iure
-                debitis neque esse libero exercitationem tenetur laboriosam! Fugit similique odio ullam vitae, unde
-                necessitatibus, sed aliquid sapiente adipisci nulla dolore voluptatem deleniti.</span>
+              <span class="hero__input-text">Lorem, ipsum dolor sit amet consectetur
+                adipisicing elit. Similique eos qui
+                quasi tempore laborum veritatis in reiciendis labore nulla, </span>
+              <input class="hero__input-edit hero__input-edit--hidden" type="text" value="">
             </label>
             <div class="hero__btn-wrapper">
-              <button class="hero__btn-edit">
+              <button class="hero__btn-edit" data-type="edit" type="button">
                 <span class="visually-hidden">Редактировать</span>
               </button>
-              <button class="hero__btn-delete">
+              <button class="hero__btn-done hero__btn-hidden" data-type="done" type="button">
+                <span class="visually-hidden">Подтвердить</span>
+              </button>
+              <button class="hero__btn-delete" data-type="delete" type="button">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+              <button class="hero__btn-cancel hero__btn-hidden" data-type="cancel" type="button">
                 <span class="visually-hidden">Удалить</span>
               </button>
             </div>
@@ -60,14 +66,20 @@
             <label class="hero__label">
               <input class="hero__input" type="checkbox">
               <span class="hero__input-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis ex
-                suscipit voluptas ratione tempora doloribus nulla accusamus corporis possimus aperiam. Optio placeat
-                nostrum adipisci fugit corporis voluptatem facere nesciunt perferendis!</span>
+                suscipit voluptas ratione corporis </span>
+              <input class="hero__input-edit hero__input-edit--hidden" type="text" value="">
             </label>
             <div class="hero__btn-wrapper">
-              <button class="hero__btn-edit">
+              <button class="hero__btn-edit" data-type="edit" type="button">
                 <span class="visually-hidden">Редактировать</span>
               </button>
-              <button class="hero__btn-delete">
+              <button class="hero__btn-done hero__btn-hidden" data-type="done" type="button">
+                <span class="visually-hidden">Подтвердить</span>
+              </button>
+              <button class="hero__btn-delete" data-type="delete" type="button">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+              <button class="hero__btn-cancel hero__btn-hidden" data-type="cancel" type="button">
                 <span class="visually-hidden">Удалить</span>
               </button>
             </div>
@@ -77,12 +89,19 @@
               <input class="hero__input" type="checkbox">
               <span class="hero__input-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi impedit
                 culpa in reiciendis autem atque unde ad dicta maiores porro!</span>
+              <input class="hero__input-edit hero__input-edit--hidden" type="text" value="">
             </label>
             <div class="hero__btn-wrapper">
-              <button class="hero__btn-edit">
+              <button class="hero__btn-edit" data-type="edit" type="button">
                 <span class="visually-hidden">Редактировать</span>
               </button>
-              <button class="hero__btn-delete">
+              <button class="hero__btn-done hero__btn-hidden" data-type="done" type="button">
+                <span class="visually-hidden">Подтвердить</span>
+              </button>
+              <button class="hero__btn-delete" data-type="delete" type="button">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+              <button class="hero__btn-cancel hero__btn-hidden" data-type="cancel" type="button">
                 <span class="visually-hidden">Удалить</span>
               </button>
             </div>
@@ -93,7 +112,7 @@
             alt="Детектив с лупой идёт по следам" loading="lazy">
           <p class="hero__img-text">Тут пока пусто</p>
         </div>
-        <button class="hero__btn-cancel hero__btn-cancel--hidden">
+        <button class="hero__btn-cancel-del hero__btn-cancel-del--hidden">
           <!-- <svg class="" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <g class="">
               <circle class="" cx="10" cy="10" r="10" />
@@ -107,9 +126,12 @@
         </button>
         <dialog class="hero__dialog dialog" aria-labelledby="dialog-name">
           <h2 class="dialog__title" id="dialog-name">Новая заметка</h2>
-          <form class="dialog__form" action="#" method="dialog">
-            <input class="dialog__input" type="text" aria-label="Описание задачи" placeholder="Введите свою заметку..."
-              required>
+          <form class="dialog__form">
+            <div>
+              <input class="dialog__input" type="text" aria-label="Описание задачи"
+                placeholder="Введите свою заметку...">
+              <span class="dialog__error dialog__error--hidden">Поле не может быть пустым</span>
+            </div>
             <div class="dialog__btn-wrapper">
               <button class="dialog__btn dialog__btn--close" type="reset">Отмена</button>
               <button class="dialog__btn dialog__btn--add" type="submit">Добавить</button>
@@ -122,12 +144,19 @@
           <label class="hero__label">
             <input class="hero__input" type="checkbox">
             <span class="hero__input-text"></span>
+            <input class="hero__input-edit hero__input-edit--hidden" type="text" value="">
           </label>
           <div class="hero__btn-wrapper">
-            <button class="hero__btn-edit">
+            <button class="hero__btn-edit" data-type="edit" type="button">
               <span class="visually-hidden">Редактировать</span>
             </button>
-            <button class="hero__btn-delete">
+            <button class="hero__btn-done hero__btn-hidden" data-type="done" type="button">
+              <span class="visually-hidden">Подтвердить</span>
+            </button>
+            <button class="hero__btn-delete" data-type="delete" type="button">
+              <span class="visually-hidden">Удалить</span>
+            </button>
+            <button class="hero__btn-cancel hero__btn-hidden" data-type="cancel" type="button">
               <span class="visually-hidden">Удалить</span>
             </button>
           </div>

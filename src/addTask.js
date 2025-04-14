@@ -9,6 +9,7 @@ const taskTemplate = document.querySelector("#task-template").content;
 const itemTemplate = taskTemplate.querySelector(".hero__item");
 
 function openDialog() {
+  errorMessage.classList.add("dialog__error--hidden");
   dialogWindow.showModal();
   pageBody.classList.add("page__body-no-scroll");
 };
@@ -42,12 +43,27 @@ dialogWindow.addEventListener("keydown", function (evt) {
     closeDialog();
   }
 });
-formDialog.addEventListener("submit", function () {
+
+const errorMessage = document.querySelector(".dialog__error");
+
+formDialog.addEventListener("submit", function (event) {
+  event.preventDefault();
   const newTaskItem = itemTemplate.cloneNode(true);
-  const taskTextInput = inputDialog.value;
+  const taskTextInput = inputDialog.value.trim();
+  if (taskTextInput === "") {
+    errorMessage.classList.remove("dialog__error--hidden");
+    return;
+  }
+  errorMessage.classList.add("dialog__error--hidden");
   const taskDescription = newTaskItem.querySelector(".hero__input-text");
   taskDescription.textContent = taskTextInput;
   listHero.appendChild(newTaskItem);
   inputDialog.value = "";
   closeDialog();
+});
+
+inputDialog.addEventListener("input", () => {
+  if (inputDialog.value.trim() !== "") {
+    errorMessage.classList.add("dialog__error--hidden");
+  }
 });
