@@ -38,7 +38,7 @@
   appearance: none;
   position: relative;
   left: 0;
-  transition: 500ms;
+  transition: all 500ms ease-out;
   cursor: pointer;
 
   &:checked {
