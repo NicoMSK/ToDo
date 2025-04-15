@@ -32,14 +32,15 @@ function closeOnBackDropClick({ currentTarget, target }) {
 }
 
 buttonOpenDialog.addEventListener("click", openDialog);
-buttonCloseDialog.addEventListener("click", function (evt) {
-  evt.stopPropagation();
+buttonCloseDialog.addEventListener("click", function (event) {
+  event.stopPropagation();
   closeDialog();
 });
 dialogWindow.addEventListener("click", closeOnBackDropClick);
-dialogWindow.addEventListener("keydown", function (evt) {
-  let keyCode = evt.keyCode;
-  if (keyCode === 27) {
+dialogWindow.addEventListener("keydown", function (event) {
+  const keyCode = event.keyCode;
+  const ESC = 27;
+  if (keyCode === ESC) {
     closeDialog();
   }
 });

@@ -1,9 +1,13 @@
 const todoList = document.querySelector(".hero__list");
 
-function switchesVisibilityBlock(event) {
-  const clickBtn = event.target.closest('[data-type]');
-  if (!clickBtn) return;
-  const todoItem = clickBtn.closest('.hero__item');
+function getClickedButton(event) {
+  return event.target.closest('[data-type]');
+}
+
+function switchTodoItemToEditMode(event) {
+  const clickedButton = getClickedButton(event);
+  if (!clickedButton) return;
+  const todoItem = clickedButton.closest('.hero__item');
   const spanText = todoItem.querySelector('.hero__input-text');
   const editInputText = todoItem.querySelector('.hero__input-edit');
   editInputText.value = spanText.innerText;
@@ -13,9 +17,9 @@ function switchesVisibilityBlock(event) {
 }
 
 function saveEditedTaskText(event) {
-  const clickButton = event.target.closest('[data-type]');
-  if (!clickButton) return;
-  const todoItem = clickButton.closest('.hero__item');
+  const clickedButton = getClickedButton(event);
+  if (!clickedButton) return;
+  const todoItem = clickedButton.closest('.hero__item');
   const spanText = todoItem.querySelector('.hero__input-text');
   const editInputText = todoItem.querySelector('.hero__input-edit');
   spanText.innerText = editInputText.value;
@@ -24,17 +28,17 @@ function saveEditedTaskText(event) {
 }
 
 function cancelsInput(event) {
-  const clickButton = event.target.closest('[data-type]');
-  if (!clickButton) return;
-  const todoItem = clickButton.closest('.hero__item');
+  const clickedButton = getClickedButton(event);
+  if (!clickedButton) return;
+  const todoItem = clickedButton.closest('.hero__item');
   const spanText = todoItem.querySelector('.hero__input-text');
   const editInputText = todoItem.querySelector('.hero__input-edit');
   spanText.classList.remove('hero__input-text--hidden');
   editInputText.classList.add('hero__input-edit--hidden');
 }
 
-function checksIfThereClassElement(event) {
-  const clickedButton = event.target.closest('[data-type]');
+function checksIfElementHasClass(event) {
+  const clickedButton = getClickedButton(event);
   if (!clickedButton) return;
   const btnType = event.target.dataset.type;
   const todoItem = clickedButton.closest('.hero__item');
@@ -45,7 +49,7 @@ function checksIfThereClassElement(event) {
 
   switch (btnType) {
     case 'edit':
-      switchesVisibilityBlock(event);
+      switchTodoItemToEditMode(event);
       editButton.classList.add('hero__btn-hidden');
       deleteButton.classList.add('hero__btn-hidden');
       doneButton.classList.remove('hero__btn-hidden');
@@ -68,6 +72,6 @@ function checksIfThereClassElement(event) {
   }
 }
 
-todoList.addEventListener('click', checksIfThereClassElement);
+todoList.addEventListener('click', checksIfElementHasClass);
 
 
