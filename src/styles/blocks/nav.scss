@@ -64,30 +64,32 @@
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 7px;
+    margin-left: auto;
+    background-image: url("/src/icons/sprite.svg#arrow-down");
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease;
+  }
+
+  &:active {
+    background: #534cc2;
+    outline: 2px solid $purple;
+  }
 }
 
-.nav__select-btn:active {
-  background: #534cc2;
-  outline: 2px solid $purple;
-}
-
-.nav__select-btn::after {
-  content: "";
-  width: 17px;
-  height: 7px;
-  margin-left: auto;
-  background-image: url("/src/icons/sprite.svg#arrow-down");
-  background-repeat: no-repeat;
-  background-position: 3px;
-}
-
-.nav__select-box--show .nav__select-list {
-  display: block;
-}
-
-//почему-то не переворачивается стрелка
-.nav__select-box--show .nav__select-btn::after {
-  transform: rotate(180deg);
+.nav__select-wrapper--open {
+  .nav__select-list {
+    display: block;
+    z-index: 2;
+  }
+  .nav__select-btn::after {
+    transform: rotate(180deg);
+  }
 }
 
 .nav__select-list {
