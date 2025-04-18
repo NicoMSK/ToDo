@@ -54,11 +54,11 @@
     background-image: url("/src/icons/sprite.svg#arrow-checkbox");
     background-repeat: no-repeat;
     background-position: center;
-    transition: 500ms;
+    transition: all 500ms ease-out;
   }
 }
 
-.hero__input:checked + span {
+.hero__input:checked + .hero__input-text {
   font-weight: 400;
   color: rgba(37, 37, 37, 0.5);
   text-decoration: line-through;
@@ -66,10 +66,6 @@
 
 .hero__input-text {
   width: 100%;
-
-  &--hidden {
-    display: none;
-  }
 }
 
 .hero__input-edit {
@@ -80,10 +76,22 @@
   border: 0;
   border: none;
   outline: none;
+}
 
-  &--hidden {
-    display: none;
-  }
+.hero__item .hero__input-edit {
+  display: none;
+}
+
+.hero__item .hero__input-text {
+  display: block;
+}
+
+.hero__item--edit .hero__input-edit {
+  display: block;
+}
+
+.hero__item--edit .hero__input-text {
+  display: none;
 }
 
 .hero__btn-wrapper {
@@ -157,6 +165,26 @@
 
 .hero__item:hover .hero__btn-wrapper {
   opacity: 1;
+}
+
+.hero__item .hero__btn-edit,
+.hero__item .hero__btn-delete {
+  display: block;
+}
+
+.hero__item .hero__btn-done,
+.hero__item .hero__btn-cancel {
+  display: none;
+}
+
+.hero__item--edit .hero__btn-edit,
+.hero__item--edit .hero__btn-delete {
+  display: none;
+}
+
+.hero__item--edit .hero__btn-done,
+.hero__item--edit .hero__btn-cancel {
+  display: block;
 }
 
 .hero__img-wrapper {
