@@ -1,4 +1,5 @@
 import { initDialog } from "./dialog.js";
+import { addsPictureWhenNoTasks } from "./deleteTask.js";
 
 const closeDialog = initDialog();
 
@@ -31,6 +32,7 @@ function initForm(closeDialog) {
     listHero.appendChild(newTaskItem);
     inputDialog.value = "";
 
+    addsPictureWhenNoTasks();
     closeDialog();
   });
 
