@@ -1,4 +1,4 @@
 import 'normalize.css';
 import './main.scss';
-import './addTask.js';
+import './form.js';
 import './editTask.js';

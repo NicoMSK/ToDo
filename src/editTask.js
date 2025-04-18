@@ -6,7 +6,7 @@ function getClickedButton(event) {
 
 function switchTodoItemToEditMode(event) {
   const clickedButton = getClickedButton(event);
-  if (!clickedButton) return;
+
   const todoItem = clickedButton.closest('.hero__item');
   const spanText = todoItem.querySelector('.hero__input-text');
   const editInputText = todoItem.querySelector('.hero__input-edit');
@@ -16,9 +16,32 @@ function switchTodoItemToEditMode(event) {
   editInputText.focus();
 }
 
+// делаем функцию, которая обрабатывает события
+// и эта фукнкция уже в зависимости от того была ли нажата кнопка и какая запускает соответствующую функцию
+
+// function handleClick(event) {
+//   const clickedButton = event.target.closest('[data-type]');
+//   if (!clickedButton) return;
+
+//   const buttonType = clickedButton.dataset.type
+
+//   if ()
+//   switch(buttonType)
+//     saveEditedTaskText(clickedButton)
+// }
+
+// function getNodes(button) {
+//   const todoItem = button.closest('.hero__item');
+//   const spanText = todoItem.querySelector('.hero__input-text');
+//   const editInputText = todoItem.querySelector('.hero__input-edit');
+
+//   return
+// }
+
 function saveEditedTaskText(event) {
   const clickedButton = getClickedButton(event);
-  if (!clickedButton) return;
+  // const result = getNodes(clickedButton)
+
   const todoItem = clickedButton.closest('.hero__item');
   const spanText = todoItem.querySelector('.hero__input-text');
   const editInputText = todoItem.querySelector('.hero__input-edit');
@@ -27,9 +50,13 @@ function saveEditedTaskText(event) {
   editInputText.classList.add('hero__input-edit--hidden');
 }
 
+// .hero__item.edit - mode.hero__btn - edit {
+//   display: block;
+// }
+
 function cancelsInput(event) {
   const clickedButton = getClickedButton(event);
-  if (!clickedButton) return;
+
   const todoItem = clickedButton.closest('.hero__item');
   const spanText = todoItem.querySelector('.hero__input-text');
   const editInputText = todoItem.querySelector('.hero__input-edit');
