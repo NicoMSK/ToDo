@@ -12,29 +12,40 @@ function addsPictureWhenNoTasks() {
 };
 
 /// таймер для исчезания кнопки возврата уадлёной задачи
-let time = 5;
-const timerForRemoteTaskReturnButton = setInterval(() => {
-  const countButton = document.querySelector('.hero__btn-count');
-  countButton.textContent = time;
-  if (time <= 0) {
-    clearInterval(timerForRemoteTaskReturnButton)
-  } time--;
+let count = 5;
+let startingTimer = null;
 
-  setTimeout(returnsDeletedTask, 5000);
-}, 1000);
+function timerForRemoteTaskReturnButton() {
+  const countButton = document.querySelector('.hero__btn-count');
+
+  countButton.textContent = count;
+
+  if (count <= 0) {
+    cancelTaskDeletion.classList.add('hero__btn-cancel-del--hidden');
+  }
+  count--;
+
+  startingTimer = setTimeout(timerForRemoteTaskReturnButton, 1000);
+};
+
 
 function deleteTask(event) {
   const deleteButton = event.target;
-  if (event.target.dataset.type === 'delete') {
+  if (deleteButton.dataset.type === 'delete') {
     deleteButton.closest('.hero__item').remove();
     cancelTaskDeletion.classList.remove('hero__btn-cancel-del--hidden');
+
+    clearTimeout(startingTimer);
+    count = 5;
+    timerForRemoteTaskReturnButton();
+
     addsPictureWhenNoTasks();
+    setTimeout(returnsDeletedTask, 5000);
   }
 };
 
 function returnsDeletedTask() {
   cancelTaskDeletion.classList.add('hero__btn-cancel-del--hidden');
-
 };
 
 todoList.addEventListener('click', deleteTask);
