@@ -1,54 +1,62 @@
 const todoList = document.querySelector(".hero__list");
-const itemsHero = todoList.children;
-const imgHero = document.querySelector(".hero__img-wrapper");
-const cancelTaskDeletion = document.querySelector('.hero__btn-cancel-del');
+const heroItems = todoList.children;
+const heroImg = document.querySelector(".hero__img-wrapper");
+const cancelTaskDeletionButton = document.querySelector('.hero__btn-cancel-del');
 
 function addsPictureWhenNoTasks() {
-  if (itemsHero.length === 0) {
-    imgHero.classList.remove("hero__img-wrapper--hidden");
+  if (heroItems.length === 0) {
+    heroImg.classList.remove("hero__img-wrapper--hidden");
   } else {
-    imgHero.classList.add("hero__img-wrapper--hidden");
+    heroImg.classList.add("hero__img-wrapper--hidden");
   }
 };
 
-/// таймер для исчезания кнопки возврата уадлёной задачи
-let count = 5;
-let startingTimer = null;
+function getTimerStarter() {
 
-function timerForRemoteTaskReturnButton() {
-  const countButton = document.querySelector('.hero__btn-count');
+  let startingTimer = null;
 
-  countButton.textContent = count;
+  function startTimerForRemoteTaskReturnButton() {
+    clearTimeout(startingTimer);
 
-  if (count <= 0) {
-    cancelTaskDeletion.classList.add('hero__btn-cancel-del--hidden');
-  }
-  count--;
+    let count = 5;
+    const countButton = document.querySelector('.hero__btn-count');
 
-  startingTimer = setTimeout(timerForRemoteTaskReturnButton, 1000);
+    function decreaseCounter() {
+      countButton.textContent = count;
+
+      if (count <= 0) {
+        cancelTaskDeletionButton.classList.add('hero__btn-cancel-del--hidden');
+      }
+      count--;
+
+      if (count >= 0) {
+        startingTimer = setTimeout(decreaseCounter, 1000);
+      }
+    }
+    decreaseCounter();
+  };
+
+  return startTimerForRemoteTaskReturnButton;
 };
 
+const startTimerButton = getTimerStarter();
 
 function deleteTask(event) {
   const deleteButton = event.target;
   if (deleteButton.dataset.type === 'delete') {
     deleteButton.closest('.hero__item').remove();
-    cancelTaskDeletion.classList.remove('hero__btn-cancel-del--hidden');
+    cancelTaskDeletionButton.classList.remove('hero__btn-cancel-del--hidden');
 
-    clearTimeout(startingTimer);
-    count = 5;
-    timerForRemoteTaskReturnButton();
-
+    startTimerButton();
     addsPictureWhenNoTasks();
-    setTimeout(returnsDeletedTask, 5000);
   }
 };
 
 function returnsDeletedTask() {
-  cancelTaskDeletion.classList.add('hero__btn-cancel-del--hidden');
+  cancelTaskDeletionButton.classList.add('hero__btn-cancel-del--hidden');
 };
 
 todoList.addEventListener('click', deleteTask);
-cancelTaskDeletion.addEventListener('click', returnsDeletedTask);
+cancelTaskDeletionButton.addEventListener('click', returnsDeletedTask);
 
 export { addsPictureWhenNoTasks };

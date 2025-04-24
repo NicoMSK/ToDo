@@ -29,13 +29,13 @@ function saveEditedTaskText(event) {
   todoItem.classList.remove('hero__item--edit');
 }
 
-function cancelsInput(event) {
+function cancelEditMode(event) {
   const { todoItem } = getTodoItems(event);
 
   todoItem.classList.remove('hero__item--edit');
 }
 
-function checksIfElementHasClass(event) {
+function checkIfElementHasClass(event) {
   const clickedButton = getClickedButton(event);
   if (!clickedButton) return;
 
@@ -52,12 +52,12 @@ function checksIfElementHasClass(event) {
       todoItem.classList.remove('hero__item--edit');
       break;
     case 'cancel':
-      cancelsInput(event);
+      cancelEditMode(event);
       todoItem.classList.remove('hero__item--edit');
       break;
   }
 }
 
-todoList.addEventListener('click', checksIfElementHasClass);
+todoList.addEventListener('click', checkIfElementHasClass);
 
 
