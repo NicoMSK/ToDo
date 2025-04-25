@@ -39,11 +39,12 @@
 .dialog__form {
   display: flex;
   flex-direction: column;
+  row-gap: 128px;
 }
 
 .dialog__input {
-  margin-bottom: 128px;
   padding: 8px 16px;
+  width: 100%;
   background-color: inherit;
   border: 1px solid $purple;
   border-radius: 5px;
@@ -70,6 +71,18 @@
   font-weight: 500;
   line-height: 100%;
   color: #666;
+}
+.dialog__error {
+  display: block;
+  min-height: 1rem;
+  font-size: 14px;
+  color: red;
+  transition: opacity 0.3s ease;
+
+  &--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .dialog__btn-wrapper {

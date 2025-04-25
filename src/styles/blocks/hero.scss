@@ -22,49 +22,8 @@
   }
 }
 
-.hero__img-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.hero__btn-wrapper {
-  margin-left: auto;
-  display: flex;
-  gap: 13px;
-  opacity: 0;
-}
-
-.hero__btn-edit,
-.hero__btn-delete {
-  @include button-reset;
-
-  width: 18px;
-  height: 18px;
-  background-color: #cdcdcd;
-}
-
-.hero__btn-edit {
-  mask-image: url("/src/icons/sprite.svg#fix");
-
-  &:hover {
-    background-color: $purple;
-  }
-}
-
-.hero__btn-delete {
-  mask-image: url("/src/icons/sprite.svg#delete");
-
-  &:hover {
-    background-color: #e50000;
-  }
-}
-
-.hero__item:hover .hero__btn-wrapper {
-  opacity: 1;
-}
-
 .hero__label {
+  width: 100%;
   display: flex;
   cursor: pointer;
 }
@@ -79,7 +38,7 @@
   appearance: none;
   position: relative;
   left: 0;
-  transition: 500ms;
+  transition: all 500ms ease-out;
   cursor: pointer;
 
   &:checked {
@@ -95,17 +54,150 @@
     background-image: url("/src/icons/sprite.svg#arrow-checkbox");
     background-repeat: no-repeat;
     background-position: center;
-    transition: 500ms;
+    transition: all 500ms ease-out;
   }
 }
 
-.hero__input:checked + span {
+.hero__input:checked + .hero__input-text {
   font-weight: 400;
   color: rgba(37, 37, 37, 0.5);
   text-decoration: line-through;
 }
 
+.hero__input-text {
+  width: 100%;
+}
+
+.hero__input-edit {
+  width: 100%;
+  background-color: inherit;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border: none;
+  outline: none;
+}
+
+.hero__item .hero__input-edit {
+  display: none;
+}
+
+.hero__item .hero__input-text {
+  display: block;
+}
+
+.hero__item--edit .hero__input-edit {
+  display: block;
+}
+
+.hero__item--edit .hero__input-text {
+  display: none;
+}
+
+.hero__btn-wrapper {
+  margin-left: 10px;
+  display: flex;
+  gap: 13px;
+  opacity: 0;
+}
+
+.hero__btn-hidden {
+  display: none;
+}
+
+.hero__btn-edit,
+.hero__btn-delete,
+.hero__btn-done,
 .hero__btn-cancel {
+  @include button-reset;
+
+  width: 18px;
+  height: 18px;
+  background-color: #cdcdcd;
+}
+
+.hero__btn-edit {
+  mask-image: url("./icons/sprite.svg#fix");
+
+  &:hover {
+    background-color: $purple;
+  }
+}
+
+.hero__btn-delete {
+  mask-image: url("./icons/sprite.svg#delete");
+
+  &:hover {
+    background-color: #e50000;
+  }
+}
+
+.hero__btn-done {
+  width: 14px;
+  height: 7px;
+  position: relative;
+  left: 9px;
+  top: 9px;
+  background-color: inherit;
+  border-bottom: 3px solid #6c63ff;
+  border-left: 3px solid #6c63ff;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.hero__btn-cancel {
+  width: 16px;
+  height: 3px;
+  position: relative;
+  background-color: #e50000;
+  transform: rotate(45deg) translate(6px, 7px);
+
+  &::after {
+    width: 16px;
+    height: 3px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #e50000;
+    transform: rotate(-90deg) translate(0, 0);
+  }
+}
+
+.hero__item:hover .hero__btn-wrapper {
+  opacity: 1;
+}
+
+.hero__item .hero__btn-edit,
+.hero__item .hero__btn-delete {
+  display: block;
+}
+
+.hero__item .hero__btn-done,
+.hero__item .hero__btn-cancel {
+  display: none;
+}
+
+.hero__item--edit .hero__btn-edit,
+.hero__item--edit .hero__btn-delete {
+  display: none;
+}
+
+.hero__item--edit .hero__btn-done,
+.hero__item--edit .hero__btn-cancel {
+  display: block;
+}
+
+.hero__img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &--hidden {
+    @include visually-hidden;
+  }
+}
+
+.hero__btn-cancel-del {
   @include button-reset;
 
   margin-top: auto;
@@ -128,6 +220,10 @@
 
   &:hover {
     background-color: $purple;
+  }
+
+  &--hidden {
+    @include visually-hidden;
   }
 }
 
