@@ -1,5 +1,4 @@
 export function initDialog() {
-
   const pageBody = document.querySelector(".page__body");
   const buttonOpenDialog = document.querySelector(".hero__btn-add");
   const dialogWindow = document.querySelector(".dialog");
@@ -22,7 +21,6 @@ export function initDialog() {
   };
 
   function closeOnBackDropClick(event) {
-    // const { currentTarget, target } = event  ---- это тоже самое, что и две строчки ниже, только более компактная запись.
     const currentTarget = event.currentTarget
     const target = event.target
     const isClickedOnBackDrop = target === currentTarget;
