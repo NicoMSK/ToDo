@@ -1,7 +1,7 @@
-import { initDialog } from "./dialog.js";
+import * as controllerDialog from "./dialog/controllerDialog.js";
 import { addsPictureWhenNoTasks } from "./deleteTask.js";
 
-const closeDialog = initDialog();
+const closeDialog = controllerDialog.closeDialog;
 
 function initForm(closeDialog) {
 

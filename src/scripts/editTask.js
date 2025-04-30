@@ -55,6 +55,8 @@ function checkIfElementHasClass(event) {
       cancelEditMode(event);
       todoItem.classList.remove('hero__item--edit');
       break;
+    case 'delete':
+      break;
     default:
       throw new Error('Ошибка, кнопка не найдена')
   }
