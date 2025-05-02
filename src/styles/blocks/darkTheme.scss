@@ -1,0 +1,45 @@
+@use "/src/styles/common/variables.scss" as *;
+@use "/src/styles/common/fonts" as *;
+
+.dark__theme {
+  color: $white;
+  background-color: $black;
+}
+
+.dark__theme .nav__input {
+  background-image: url("/src/icons/sprite.svg#search-white");
+  border: 1px solid $white;
+
+  &::placeholder {
+    color: #666;
+  }
+}
+
+.dark__theme .nav__theme-btn {
+  background-image: url("/src/icons/sprite.svg#sun");
+}
+
+.dark__theme .hero__item {
+  color: $white;
+}
+
+.dark__theme .hero__input:checked + .hero__input-text {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: line-through;
+}
+
+.dark__theme .dialog {
+  color: $white;
+  background-color: $black;
+  border: 1px solid $white;
+}
+
+.dark__theme .dialog__input {
+  color: $white;
+  border: 1px solid $white;
+
+  &::placeholder {
+    color: #666;
+  }
+}

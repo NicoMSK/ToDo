@@ -8,6 +8,8 @@
 /* BLOCKS */
 
 @use "./styles/blocks/page.scss";
+@use "./styles/blocks/lightTheme.scss";
+@use "./styles/blocks/darkTheme.scss";
 @use "./styles/blocks/container.scss";
 @use "./styles/blocks/header.scss";
 @use "./styles/blocks/nav.scss";

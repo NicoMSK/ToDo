@@ -14,17 +14,14 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
+  border: 1px solid $purple;
   border-radius: 5px;
+  background-image: url("/src/icons/sprite.svg#search");
   background-color: inherit;
   background-size: 21px 21px;
   background-position: 98%;
   background-repeat: no-repeat;
   outline: none;
-}
-
-.nav__input--light-theme {
-  background-image: url("/src/icons/sprite.svg#search");
-  border: 1px solid $purple;
 
   &::placeholder {
     color: #c3c1e5;
@@ -32,15 +29,6 @@
 
   &:focus-visible {
     box-shadow: 4px 5px 24px rgba(108, 99, 255, 0.2);
-  }
-}
-
-.nav__input--dark-theme {
-  background-image: url("/src/icons/sprite.svg#search-white");
-  border: 1px solid $white;
-
-  &::placeholder {
-    color: #666;
   }
 }
 
@@ -124,6 +112,7 @@
   width: 38px;
   height: 38px;
   background-color: $purple;
+  background-image: url("/src/icons/sprite.svg#moon");
   background-size: 22px 22px;
   background-repeat: no-repeat;
   background-position: center;
@@ -131,11 +120,4 @@
   &:hover {
     background-color: #5850dd;
   }
-}
-.nav__theme-btn--light {
-  background-image: url("/src/icons/sprite.svg#moon");
-}
-
-.nav__theme-btn--dark {
-  background-image: url("/src/icons/sprite.svg#sun");
 }
