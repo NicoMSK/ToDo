@@ -1,26 +1,23 @@
-import * as viewDialog from "./viewDialog.js";
-
-export function openDialog(message, body) {
-  viewDialog.errorMessage.classList.add(message);
-  viewDialog.dialogWindow.showModal();
-  viewDialog.pageBody.classList.add(body);
+export function openDialog(errorElement, dialogElement, bodyElement, errorClass, bodyClass) {
+  errorElement.classList.add(errorClass);
+  dialogElement.showModal();
+  bodyElement.classList.add(bodyClass);
 };
 
-function enableScrollOnBody() {
-  viewDialog.pageBody.classList.remove("page__body-no-scroll");
+function enableScrollOnBody(bodyElement, bodyClass) {
+  bodyElement.classList.remove(bodyClass);
 };
 
-export function closeDialog() {
-  viewDialog.dialogWindow.close();
-  enableScrollOnBody();
-  return closeDialog
+export function closeDialog(dialogElementClose, bodyElement, bodyClass) {
+  dialogElementClose.close();
+  enableScrollOnBody(bodyElement, bodyClass);
 };
 
-export function closeOnBackDropClick(event) {
+export function closeOnBackDropClick(event, dialogElementClose, bodyElement, bodyClass) {
   const currentTarget = event.currentTarget
   const target = event.target
   const isClickedOnBackDrop = target === currentTarget;
   if (isClickedOnBackDrop) {
-    closeDialog();
+    closeDialog(dialogElementClose, bodyElement, bodyClass);
   }
 }
