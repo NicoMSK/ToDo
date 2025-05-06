@@ -6,7 +6,7 @@ import * as viewDelete from '../delete/viewDelete.js';
 
 viewForm.dialogForm.addEventListener("submit", function (event) {
   event.preventDefault();
-  const isSuccesfullAdded = modelForm.createNewTask();
+  const isSuccesfullAdded = viewForm.createNewTask();
   if (isSuccesfullAdded) {
     modelDelete.addsPictureWhenNoTasks(viewDelete.heroItems, viewDelete.heroImg, "hero__img-wrapper--hidden");
     controllerDialog.closeDialog();
@@ -14,5 +14,5 @@ viewForm.dialogForm.addEventListener("submit", function (event) {
 });
 
 viewForm.inputDialog.addEventListener("input", () => {
-  modelForm.validateStringNotEmpty();
+  modelForm.validateStringNotEmpty(viewForm.inputDialog, viewForm.errorMessage, "dialog__error--hidden");
 });
