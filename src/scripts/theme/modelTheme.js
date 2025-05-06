@@ -1,5 +1,3 @@
-import * as viewTheme from './viewTheme.js';
-
-export function switchingThemes() {
-  viewTheme.bodyTheme.classList.toggle('dark__theme');
+export function switchingThemes(bodyElement, bodyClass) {
+  bodyElement.classList.toggle(bodyClass);
 }
