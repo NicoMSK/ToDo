@@ -1,10 +1,8 @@
-import * as viewDelete from './viewDelete.js';
-
-export function addsPictureWhenNoTasks() {
-  if (viewDelete.heroItems.length === 0) {
-    viewDelete.heroImg.classList.remove("hero__img-wrapper--hidden");
+export function addsPictureWhenNoTasks(items, image, toggleClass) {
+  if (items.length === 0) {
+    image.classList.remove(toggleClass);
   } else {
-    viewDelete.heroImg.classList.add("hero__img-wrapper--hidden");
+    image.classList.add(toggleClass);
   }
 };
 
@@ -12,17 +10,17 @@ function getTimerStarter() {
 
   let startingTimer = null;
 
-  function startTimerForRemoteTaskReturnButton() {
+  function startTimerForRemoteTaskReturnButton(button, classButton, addClass) {
     clearTimeout(startingTimer);
 
     let count = 5;
-    const countButton = document.querySelector('.hero__btn-count');
+    const countButton = button;
 
     function decreaseCounter() {
       countButton.textContent = count;
 
       if (count <= 0) {
-        viewDelete.cancelTaskDeletionButton.classList.add('hero__btn-cancel-del--hidden');
+        classButton.classList.add(addClass);
       }
       count--;
 
@@ -36,19 +34,16 @@ function getTimerStarter() {
   return startTimerForRemoteTaskReturnButton;
 };
 
-const startTimerButton = getTimerStarter();
+export const startTimerButton = getTimerStarter();
 
-export function deleteTask(event) {
+export function deleteTask(event, datasetType, item, button, removeClass) {
   const deleteButton = event.target;
-  if (deleteButton.dataset.type === 'delete') {
-    deleteButton.closest('.hero__item').remove();
-    viewDelete.cancelTaskDeletionButton.classList.remove('hero__btn-cancel-del--hidden');
-
-    startTimerButton();
-    addsPictureWhenNoTasks();
+  if (deleteButton.dataset.type === datasetType) {
+    deleteButton.closest(item).remove();
+    button.classList.remove(removeClass);
   }
 };
 
-export function returnsDeletedTask() {
-  viewDelete.cancelTaskDeletionButton.classList.add('hero__btn-cancel-del--hidden');
+export function returnsDeletedTask(button, addClass) {
+  button.classList.add(addClass);
 };

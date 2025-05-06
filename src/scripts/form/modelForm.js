@@ -19,7 +19,7 @@ export function createNewTask() {
   return true;
 };
 
-export function theyWillCheckIfLineIsEmpty() {
+export function validateStringNotEmpty() {
   if (viewForm.inputDialog.value.trim() !== "") {
     viewForm.errorMessage.classList.add("dialog__error--hidden");
   };
