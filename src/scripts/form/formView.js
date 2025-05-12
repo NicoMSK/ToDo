@@ -6,21 +6,35 @@ export const heroList = document.querySelector(".hero__list");
 export const taskTemplate = document.querySelector("#task-template").content;
 export const itemTemplate = taskTemplate.querySelector(".hero__item");
 
-export function createNewTask() {
+export function getNewTaskTitle() {
   const taskTextInput = inputDialog.value.trim();
-  const newTaskItem = itemTemplate.cloneNode(true);
-  const taskDescription = newTaskItem.querySelector(".hero__input-text");
 
   if (taskTextInput === "") {
     errorMessage.classList.remove("dialog__error--hidden");
-    return false;
+    return null;
   };
 
   errorMessage.classList.add("dialog__error--hidden");
+  return taskTextInput;
+};
 
-  taskDescription.textContent = taskTextInput;
-  heroList.appendChild(newTaskItem);
-  inputDialog.value = "";
+export function renderList(someDataArr) {
+  heroList.innerHTML = "";
+
+  for (let i = 0; i < someDataArr.length; i++) {
+    const newTaskItem = itemTemplate.cloneNode(true);
+    const taskDescription = newTaskItem.querySelector(".hero__input-text");
+
+    taskDescription.textContent = someDataArr[i]['title'];
+    heroList.appendChild(newTaskItem);
+    inputDialog.value = "";
+  };
 
   return true;
+};
+
+export function validateStringNotEmpty() {
+  if (inputDialog.value.trim() !== "") {
+    errorMessage.classList.add("dialog__error--hidden");
+  };
 };
