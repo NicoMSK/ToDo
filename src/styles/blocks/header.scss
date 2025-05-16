@@ -1,3 +1,5 @@
+@use "/src/styles/common/variables.scss" as *;
+
 .header {
   padding-top: 40px;
 }
@@ -13,4 +15,8 @@
 .header__nav {
   display: flex;
   gap: 16px;
+
+  @media (max-width: $mobile-width) {
+    flex-direction: column;
+  }
 }

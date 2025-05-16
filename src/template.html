@@ -17,21 +17,23 @@
             <input class="nav__input nav__input--light-theme " type="search" placeholder="Поиск заметки...">
           </form>
         </search>
-        <div class="nav__select-wrapper">
-          <button class="nav__select-btn" type="button" data-select="toggle" data-index="-1">
-          </button>
-          <div class="nav__select-box">
-            <ul class="nav__select-list">
-              <li class="nav__select-item" data-select="optinon" data-value="all" data-index="0">Все</li>
-              <li class="nav__select-item" data-select="optinon" data-value="complete" data-index="1">Завершено</li>
-              <li class="nav__select-item" data-select="optinon" data-value="incomplete" data-index="2">В планах
-              </li>
-            </ul>
+        <div class="nav__wrapper">
+          <div class="nav__select-wrapper">
+            <button class="nav__select-btn" type="button" data-select="toggle" data-index="-1">
+            </button>
+            <div class="nav__select-box">
+              <ul class="nav__select-list">
+                <li class="nav__select-item" data-select="optinon" data-value="all" data-index="0">Все</li>
+                <li class="nav__select-item" data-select="optinon" data-value="complete" data-index="1">Завершено</li>
+                <li class="nav__select-item" data-select="optinon" data-value="incomplete" data-index="2">В планах
+                </li>
+              </ul>
+            </div>
           </div>
+          <button class="nav__theme-btn nav__theme-btn--light" type="button">
+            <span class="visually-hidden">Сменить тему</span>
+          </button>
         </div>
-        <button class="nav__theme-btn nav__theme-btn--light" type="button">
-          <span class="visually-hidden">Сменить тему</span>
-        </button>
       </nav>
     </div>
   </header>
