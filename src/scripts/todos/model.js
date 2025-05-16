@@ -7,7 +7,19 @@ const TODO_EXAMPLE = {
 const todos = [];
 
 function addTodo(newTaskTitle) {
-  todos.push({ id: new Date(), isComplete: false, title: newTaskTitle });
+  todos.push({
+    id: new Date().getTime(),
+    isComplete: false,
+    title: newTaskTitle
+  });
 };
 
-export { todos, addTodo }
+function deleteTodo(itemId, array) {
+  const indexOfTodoToDelete = array.findIndex((todoInArray) => todoInArray.id === itemId);
+  if (indexOfTodoToDelete !== -1) {
+    array.splice(indexOfTodoToDelete, 1);
+  };
+};
+
+export { todos, addTodo, deleteTodo };
+

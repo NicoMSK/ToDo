@@ -42,14 +42,20 @@ function getTimerStarter() {
 const startTimerButton = getTimerStarter();
 
 export function deleteTask(event) {
-  const deleteButton = event.target;
-  if (deleteButton.dataset.type === 'delete') {
-    deleteButton.closest('.hero__item').remove();
-    cancelTaskDeletionButton.classList.remove('hero__btn-cancel-del--hidden');
-    startTimerButton();
-  }
+  const deleteButton = event.target.closest('.hero__btn-delete');
+  if (!deleteButton || deleteButton.dataset.type !== 'delete') return;
+
+  deleteButton.closest('.hero__item').remove();
+  cancelTaskDeletionButton.classList.remove('hero__btn-cancel-del--hidden');
+  startTimerButton();
 };
 
 export function returnsDeletedTask() {
   cancelTaskDeletionButton.classList.add('hero__btn-cancel-del--hidden');
+};
+
+export function getClickedTaskId(event) {
+  const deleteButton = event.target.closest('.hero__btn-delete');
+  if (!deleteButton) return null;
+  return deleteButton.dataset.id;
 };

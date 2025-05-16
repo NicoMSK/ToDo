@@ -18,17 +18,20 @@ export function getNewTaskTitle() {
   return taskTextInput;
 };
 
-export function renderList(someDataArr) {
+export function renderList(tasksArray) {
   heroList.innerHTML = "";
 
-  for (let i = 0; i < someDataArr.length; i++) {
+  for (let i = 0; i < tasksArray.length; i++) {
     const newTaskItem = itemTemplate.cloneNode(true);
     const taskDescription = newTaskItem.querySelector(".hero__input-text");
+    const deleteButton = newTaskItem.querySelector(".hero__btn-delete");
 
-    taskDescription.textContent = someDataArr[i]['title'];
+    deleteButton.dataset.id = tasksArray[i].id;
+    taskDescription.textContent = tasksArray[i].title;
     heroList.appendChild(newTaskItem);
-    inputDialog.value = "";
   };
+
+  inputDialog.value = "";
 
   return true;
 };
