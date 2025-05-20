@@ -23,10 +23,9 @@
             </button>
             <div class="nav__select-box">
               <ul class="nav__select-list">
-                <li class="nav__select-item" data-select="optinon" data-value="all" data-index="0">Все</li>
-                <li class="nav__select-item" data-select="optinon" data-value="complete" data-index="1">Завершено</li>
-                <li class="nav__select-item" data-select="optinon" data-value="incomplete" data-index="2">В планах
-                </li>
+                <li class="nav__select-item" data-value="all">Все</li>
+                <li class="nav__select-item" data-value="complete">Завершено</li>
+                <li class="nav__select-item" data-value="incomplete">В планах</li>
               </ul>
             </div>
           </div>
@@ -41,6 +40,27 @@
     <section class="hero">
       <div class="hero__container container">
         <ul class="hero__list">
+          <li class="hero__item">
+            <label class="hero__label">
+              <input class="hero__input" type="checkbox">
+              <span class="hero__input-text">просто задача</span>
+              <input class="hero__input-edit" type="text" value="">
+            </label>
+            <div class="hero__btn-wrapper">
+              <button class="hero__btn-edit" data-type="edit" type="button">
+                <span class="visually-hidden">Редактировать</span>
+              </button>
+              <button class="hero__btn-done hero__btn-hidden" data-type="done" type="button">
+                <span class="visually-hidden">Подтвердить</span>
+              </button>
+              <button class="hero__btn-delete" data-type="delete" type="button">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+              <button class="hero__btn-cancel hero__btn-hidden" data-type="cancel" type="button">
+                <span class="visually-hidden">Удалить</span>
+              </button>
+            </div>
+          </li>
         </ul>
         <div class="hero__img-wrapper hero__img-wrapper--hidden">
           <img class="hero__img" src="images/detective.png" srcset="images/detective@2x.png 2x" width="221" height="174"
