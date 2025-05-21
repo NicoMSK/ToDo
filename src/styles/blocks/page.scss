@@ -14,17 +14,9 @@
   flex-direction: column;
   min-height: 100%;
   font-family: $main-font;
-  transition: background-color 0.3s ease;
-}
-
-.page__body--light-theme {
   color: $black;
   background-color: $white;
-}
-
-.page__body--dark-theme {
-  color: $white;
-  background-color: $black;
+  transition: background-color 0.3s ease;
 }
 
 .page__main {
