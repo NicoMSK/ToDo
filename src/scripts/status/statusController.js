@@ -1,4 +1,5 @@
 import * as statusView from "./statusView.js";
+import * as model from "../todos/model.js";
 
 statusView.buttonSelect.addEventListener('click', () => {
   statusView.openTaskStatusList();
@@ -9,4 +10,8 @@ statusView.itemSelect.forEach(item => {
     statusView.setButtonLabelFromClick(event);
     statusView.openTaskStatusList();
   });
+});
+
+statusView.listHero.addEventListener('change', (event) => {
+  statusView.changeTaskStatus(event, model.todos);
 });
