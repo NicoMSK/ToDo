@@ -14,10 +14,10 @@ function addTodo(newTaskTitle) {
   });
 };
 
-function deleteTodo(itemId, array) {
-  const indexOfTodoToDelete = array.findIndex((todoInArray) => todoInArray.id === itemId);
+function deleteTodo(itemId) {
+  const indexOfTodoToDelete = todos.findIndex((todoInArray) => todoInArray.id === itemId);
   if (indexOfTodoToDelete !== -1) {
-    array.splice(indexOfTodoToDelete, 1);
+    todos.splice(indexOfTodoToDelete, 1);
   };
 };
 

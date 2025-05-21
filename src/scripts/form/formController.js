@@ -7,7 +7,9 @@ formView.dialogForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const newTaskTitle = formView.getNewTaskTitle();
-  if (newTaskTitle === null) return;
+  if (newTaskTitle === null) {
+    return
+  };
   model.addTodo(newTaskTitle);
 
   formView.renderList(model.todos);
