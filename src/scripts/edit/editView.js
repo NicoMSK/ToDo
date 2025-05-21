@@ -1,4 +1,4 @@
-const todoList = document.querySelector(".hero__list");
+export const todoList = document.querySelector(".hero__list");
 
 function getClickedButton(event) {
   return event.target.closest('[data-type]');
@@ -35,7 +35,7 @@ function cancelEditMode(event) {
   todoItem.classList.remove('hero__item--edit');
 }
 
-function checkIfElementHasClass(event) {
+export function checkIfElementHasClass(event) {
   const clickedButton = getClickedButton(event);
   if (!clickedButton) return;
 
@@ -55,11 +55,9 @@ function checkIfElementHasClass(event) {
       cancelEditMode(event);
       todoItem.classList.remove('hero__item--edit');
       break;
+    case 'delete':
+      break;
     default:
       throw new Error('Ошибка, кнопка не найдена')
   }
-}
-
-todoList.addEventListener('click', checkIfElementHasClass);
-
-
+};

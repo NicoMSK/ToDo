@@ -1,5 +1,6 @@
 import 'normalize.css';
 import './main.scss';
-import './form.js';
-import './editTask.js';
-import './deleteTask.js';
+import './scripts/form/formController.js';
+import './scripts/dialog/dialogController.js';
+import './scripts/edit/editController.js';
+import './scripts/delete/deleteController.js';

@@ -44,6 +44,17 @@
   }
 }
 
+.nav__wrapper {
+  display: flex;
+  gap: 16px;
+
+  @media (max-width: $mobile-width) {
+    padding: 0 15px;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+}
+
 .nav__select-wrapper {
   position: relative;
 }
