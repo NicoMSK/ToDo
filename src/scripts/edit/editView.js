@@ -1,3 +1,5 @@
+export const todoList = document.querySelector(".hero__list");
+
 function getClickedButton(event) {
   return event.target.closest('[data-type]');
 };
