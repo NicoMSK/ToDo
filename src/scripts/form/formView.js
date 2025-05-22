@@ -33,8 +33,6 @@ export function renderList(tasksArray) {
   };
 
   inputDialog.value = "";
-
-  return true;
 };
 
 export function validateStringNotEmpty() {
