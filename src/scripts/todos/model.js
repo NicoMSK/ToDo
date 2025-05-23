@@ -21,5 +21,9 @@ function deleteTodo(itemId) {
   };
 };
 
+function statusChange() {
+
+}
+
 export { todos, addTodo, deleteTodo };
 

@@ -27,7 +27,6 @@ export function renderList(tasksArray) {
     const deleteButton = newTaskItem.querySelector(".hero__btn-delete");
 
     newTaskItem.dataset.id = tasksArray[i].id;
-    deleteButton.dataset.id = tasksArray[i].id;
     taskDescription.textContent = tasksArray[i].title;
     heroList.appendChild(newTaskItem);
   };

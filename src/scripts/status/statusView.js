@@ -15,7 +15,7 @@ export function setButtonLabelFromClick(event) {
 
 
 /// остановился на моменте поиска задачи в массиве, чтоб менять состояние isComplete: false,
-export function changeTaskStatus(event, array) {
+export function changeTaskStatus(event) {
   const itemId = event.target.closest(".hero__item");
 
 };

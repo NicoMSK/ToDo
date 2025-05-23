@@ -55,7 +55,8 @@ export function returnsDeletedTask() {
 };
 
 export function getClickedTaskId(event) {
-  const deleteButton = event.target.closest('.hero__btn-delete');
+  const deleteButton = event.target.closest(".hero__item");
+
   if (!deleteButton) return null;
   return deleteButton.dataset.id;
 };

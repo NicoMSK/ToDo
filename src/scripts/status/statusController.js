@@ -13,5 +13,5 @@ statusView.itemSelect.forEach(item => {
 });
 
 statusView.listHero.addEventListener('change', (event) => {
-  statusView.changeTaskStatus(event, model.todos);
+  statusView.changeTaskStatus(event);
 });
