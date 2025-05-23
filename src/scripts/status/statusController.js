@@ -13,5 +13,10 @@ statusView.itemSelect.forEach(item => {
 });
 
 statusView.listHero.addEventListener('change', (event) => {
-  statusView.changeTaskStatus(event);
+  const taskId = statusView.changeTaskStatus(event);
+  if (!taskId) {
+    return;
+  };
+
+  model.statusChange(Number(taskId));
 });

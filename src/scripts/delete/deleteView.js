@@ -1,3 +1,5 @@
+import * as taskView from "../task/taskView.js";
+
 export const todoList = document.querySelector(".hero__list");
 export const heroItems = todoList.children;
 export const heroImg = document.querySelector(".hero__img-wrapper");
@@ -55,7 +57,8 @@ export function returnsDeletedTask() {
 };
 
 export function getClickedTaskId(event) {
-  const deleteButton = event.target.closest('.hero__btn-delete');
-  if (!deleteButton) return null;
-  return deleteButton.dataset.id;
+  if (event.target.closest('.hero__btn-delete')) {
+    return taskView.getTaskIdFromEvent(event);
+  }
+  return null;
 };
