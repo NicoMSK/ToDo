@@ -2,6 +2,7 @@ import * as dialogView from "../dialog/dialogView.js";
 import * as formView from "./formView.js";
 import * as deleteView from "../delete/deleteView.js";
 import * as model from "../todos/model.js";
+import * as statusView from "../status/statusView.js";
 
 formView.dialogForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -12,7 +13,8 @@ formView.dialogForm.addEventListener("submit", (event) => {
   };
   model.addTodo(newTaskTitle);
 
-  formView.renderList(model.todos);
+  formView.renderList(model.filterTasks("all"));
+  statusView.setButtonLabelFromClick("all");
   deleteView.addsPictureWhenNoTasks();
   dialogView.closeDialog();
 });

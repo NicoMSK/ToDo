@@ -24,15 +24,34 @@ function deleteTodo(itemId) {
 
 function statusChange(itemId) {
   const task = todos.find((item) =>
-    item.id === itemId
-  );
+    item.id === itemId);
+
   if (task) {
     task.isComplete = !task.isComplete;
-    console.log("Статус задачи обновлён:", task);
-  } else {
-    console.error("Задача не найдена");
   };
 };
 
-export { todos, addTodo, deleteTodo, statusChange };
+let currentStatus = "all";
+
+function setCurrentStatus(status) {
+  currentStatus = status;
+};
+
+function getCurrentStatus() {
+  return currentStatus;
+}
+
+function filterTasks(status = currentStatus) {
+  switch (status) {
+    case "complete":
+      return todos.filter((task) => task.isComplete === true);
+    case "incomplete":
+      return todos.filter((task) => task.isComplete === false);
+    case "all":
+    default:
+      return todos;
+  };
+};
+
+export { todos, addTodo, deleteTodo, statusChange, filterTasks, setCurrentStatus, getCurrentStatus };
 

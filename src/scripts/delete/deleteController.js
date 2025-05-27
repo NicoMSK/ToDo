@@ -10,7 +10,8 @@ deleteView.todoList.addEventListener('click', (event) => {
 
   model.deleteTodo(Number(taskId));
 
-  formView.renderList(model.todos);
+  const currentStatus = model.getCurrentStatus();
+  formView.renderList(model.filterTasks(currentStatus));
   deleteView.deleteTask(event);
   deleteView.addsPictureWhenNoTasks();
 });

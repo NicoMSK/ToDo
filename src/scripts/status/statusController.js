@@ -1,14 +1,25 @@
 import * as statusView from "./statusView.js";
 import * as model from "../todos/model.js";
+import * as formView from "../form/formView.js";
+import * as deleteView from '../delete/deleteView.js';
+
+statusView.setButtonLabelFromClick("all");
 
 statusView.buttonSelect.addEventListener('click', () => {
-  statusView.openTaskStatusList();
+  statusView.toggleTaskStatusList();
 });
 
 statusView.itemSelect.forEach(item => {
   item.addEventListener('click', (event) => {
-    statusView.setButtonLabelFromClick(event);
-    statusView.openTaskStatusList();
+    const status = statusView.getTaskStatus(event);
+    model.setCurrentStatus(status);
+
+    statusView.setButtonLabelFromClick(status);
+
+    formView.renderList(model.filterTasks());
+
+    deleteView.addsPictureWhenNoTasks();
+    statusView.toggleTaskStatusList();
   });
 });
 
