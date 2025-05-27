@@ -30,4 +30,5 @@ statusView.listHero.addEventListener('change', (event) => {
   };
 
   model.statusChange(Number(taskId));
+  formView.renderList(model.filterTasks());
 });

@@ -24,7 +24,12 @@ export function renderList(tasksArray) {
   for (let i = 0; i < tasksArray.length; i++) {
     const newTaskItem = itemTemplate.cloneNode(true);
     const taskDescription = newTaskItem.querySelector(".hero__input-text");
-    const deleteButton = newTaskItem.querySelector(".hero__btn-delete");
+    const checkboxInput = newTaskItem.querySelector(".hero__input");
+
+    if (tasksArray[i].isComplete) {
+      taskDescription.classList.add("hero__input-text--checked");
+      checkboxInput.checked = true;
+    };
 
     newTaskItem.dataset.id = tasksArray[i].id;
     taskDescription.textContent = tasksArray[i].title;

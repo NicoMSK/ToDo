@@ -78,14 +78,20 @@
   }
 }
 
-.hero__input:checked + .hero__input-text {
-  font-weight: 400;
-  color: rgba(37, 37, 37, 0.5);
-  text-decoration: line-through;
-}
+// .hero__input:checked + .hero__input-text {
+//   font-weight: 400;
+//   color: rgba(37, 37, 37, 0.5);
+//   text-decoration: line-through;
+// }
 
 .hero__input-text {
   width: 100%;
+
+  &--checked {
+    font-weight: 400;
+    color: rgba(37, 37, 37, 0.5);
+    text-decoration: line-through;
+  }
 }
 
 .hero__input-edit {

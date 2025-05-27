@@ -15,7 +15,6 @@ export function setButtonLabelFromClick(status) {
   buttonSelect.textContent = selectValue.textContent;
 };
 
-
 export function changeTaskStatus(event) {
   if (event.target.matches('.hero__input[type="checkbox"]')) {
     return taskView.getTaskIdFromEvent(event);
