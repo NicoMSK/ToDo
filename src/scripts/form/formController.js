@@ -13,8 +13,10 @@ formView.dialogForm.addEventListener("submit", (event) => {
   };
   model.addTodo(newTaskTitle);
 
-  formView.renderList(model.filterTasksByStatus("all"));
-  statusView.setButtonLabelFromClick("all");
+  model.setCurrentFilterValue(model.FILTER.all);
+  formView.renderList(model.getFilteredTasks());
+  statusView.setValueForFilterSelect(model.getCurrentFilterValue());
+
   deleteView.addsPictureWhenNoTasks();
   dialogView.closeDialog();
 });

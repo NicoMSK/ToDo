@@ -6,6 +6,12 @@ const TODO_EXAMPLE = {
 
 const todos = [];
 
+const FILTER = {
+  all: "all",
+  complete: "complete",
+  incomplete: "incomplete"
+};
+
 function addTodo(newTaskTitle) {
   todos.push({
     id: new Date().getTime(),
@@ -31,27 +37,30 @@ function changeStatus(itemId) {
   };
 };
 
-let currentStatusFilter = "all";
+let currentFilterValue = FILTER.all;
 
-function setCurrentStatus(status) {
-  currentStatusFilter = status;
-};
-
-function getCurrentStatus() {
-  return currentStatusFilter;
-}
-
-function filterTasksByStatus(status = currentStatusFilter) {
-  switch (status) {
-    case "complete":
-      return todos.filter((task) => task.isComplete === true);
-    case "incomplete":
-      return todos.filter((task) => task.isComplete === false);
-    case "all":
-    default:
-      return todos;
+function setCurrentFilterValue(value) {
+  if (value in FILTER) {
+    currentFilterValue = value;
   };
 };
 
-export { todos, addTodo, deleteTodo, changeStatus, filterTasksByStatus as filterTasksByStatus, setCurrentStatus, getCurrentStatus };
+function getCurrentFilterValue() {
+  return currentFilterValue;
+};
+
+function getFilteredTasks() {
+  switch (currentFilterValue) {
+    case FILTER.complete:
+      return todos.filter((task) => task.isComplete === true);
+    case FILTER.incomplete:
+      return todos.filter((task) => task.isComplete === false);
+    case FILTER.all:
+      return todos;
+    default:
+      throw new Error("Получен фильтр, которого нет")
+  };
+};
+
+export { todos, addTodo, deleteTodo, changeStatus, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER };
 

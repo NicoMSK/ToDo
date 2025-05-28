@@ -58,7 +58,7 @@ export function returnsDeletedTask() {
 
 export function getClickedTaskId(event) {
   if (event.target.closest('.hero__btn-delete')) {
-    return taskView.getTaskIdFromEvent(event);
+    return taskView.getTaskIdFromClickEvent(event);
   }
   return null;
 };

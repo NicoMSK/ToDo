@@ -9,7 +9,7 @@ export function toggleTaskStatusList() {
   wrapperSelect.classList.toggle("nav__select-wrapper--open");
 };
 
-export function setButtonLabelFromClick(status) {
+export function setValueForFilterSelect(status) {
   const selectValue = document.querySelector(`.nav__select-item[data-value="${status}"]`);
 
   buttonSelect.textContent = selectValue.textContent;
@@ -17,11 +17,11 @@ export function setButtonLabelFromClick(status) {
 
 export function getTaskId(event) {
   if (event.target.matches('.hero__input[type="checkbox"]')) {
-    return taskView.getTaskIdFromEvent(event);
+    return taskView.getTaskIdFromClickEvent(event);
   };
   return null;
 };
 
-export function getTaskStatus(event) {
+export function getFilterValueFromClickEvent(event) {
   return event.target.dataset.value;
-}
+};
