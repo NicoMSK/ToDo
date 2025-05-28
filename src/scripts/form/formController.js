@@ -13,7 +13,7 @@ formView.dialogForm.addEventListener("submit", (event) => {
   };
   model.addTodo(newTaskTitle);
 
-  formView.renderList(model.filterTasks("all"));
+  formView.renderList(model.filterTasksByStatus("all"));
   statusView.setButtonLabelFromClick("all");
   deleteView.addsPictureWhenNoTasks();
   dialogView.closeDialog();

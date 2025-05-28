@@ -16,7 +16,7 @@ statusView.itemSelect.forEach(item => {
 
     statusView.setButtonLabelFromClick(status);
 
-    formView.renderList(model.filterTasks());
+    formView.renderList(model.filterTasksByStatus());
 
     deleteView.addsPictureWhenNoTasks();
     statusView.toggleTaskStatusList();
@@ -24,11 +24,11 @@ statusView.itemSelect.forEach(item => {
 });
 
 statusView.listHero.addEventListener('change', (event) => {
-  const taskId = statusView.changeTaskStatus(event);
+  const taskId = statusView.getTaskId(event);
   if (!taskId) {
     return;
   };
 
-  model.statusChange(Number(taskId));
-  formView.renderList(model.filterTasks());
+  model.changeStatus(Number(taskId));
+  formView.renderList(model.filterTasksByStatus());
 });

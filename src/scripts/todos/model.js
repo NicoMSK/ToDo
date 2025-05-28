@@ -22,7 +22,7 @@ function deleteTodo(itemId) {
   };
 };
 
-function statusChange(itemId) {
+function changeStatus(itemId) {
   const task = todos.find((item) =>
     item.id === itemId);
 
@@ -31,17 +31,17 @@ function statusChange(itemId) {
   };
 };
 
-let currentStatus = "all";
+let currentStatusFilter = "all";
 
 function setCurrentStatus(status) {
-  currentStatus = status;
+  currentStatusFilter = status;
 };
 
 function getCurrentStatus() {
-  return currentStatus;
+  return currentStatusFilter;
 }
 
-function filterTasks(status = currentStatus) {
+function filterTasksByStatus(status = currentStatusFilter) {
   switch (status) {
     case "complete":
       return todos.filter((task) => task.isComplete === true);
@@ -53,5 +53,5 @@ function filterTasks(status = currentStatus) {
   };
 };
 
-export { todos, addTodo, deleteTodo, statusChange, filterTasks, setCurrentStatus, getCurrentStatus };
+export { todos, addTodo, deleteTodo, changeStatus, filterTasksByStatus as filterTasksByStatus, setCurrentStatus, getCurrentStatus };
 

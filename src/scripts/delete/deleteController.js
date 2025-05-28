@@ -11,7 +11,7 @@ deleteView.todoList.addEventListener('click', (event) => {
   model.deleteTodo(Number(taskId));
 
   const currentStatus = model.getCurrentStatus();
-  formView.renderList(model.filterTasks(currentStatus));
+  formView.renderList(model.filterTasksByStatus(currentStatus));
   deleteView.deleteTask(event);
   deleteView.addsPictureWhenNoTasks();
 });
