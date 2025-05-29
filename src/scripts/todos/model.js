@@ -4,12 +4,32 @@ const TODO_EXAMPLE = {
   title: "Купить хлеба"
 }
 
-const todos = [];
+const todos = [{
+  id: 123,
+  isComplete: false,
+  title: "Купить хлеба"
+},
+{
+  id: 124,
+  isComplete: false,
+  title: "Купить "
+},
+{
+  id: 125,
+  isComplete: false,
+  title: " хлеба"
+}];
 
 const FILTER = {
   all: "all",
   complete: "complete",
   incomplete: "incomplete"
+};
+
+const FILTER_LABELS = {
+  all: "Все задачи",
+  complete: "Завершены",
+  incomplete: "В работе"
 };
 
 function addTodo(newTaskTitle) {
@@ -62,5 +82,5 @@ function getFilteredTasks() {
   };
 };
 
-export { todos, addTodo, deleteTodo, changeStatus, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER };
+export { todos, addTodo, deleteTodo, changeStatus, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS };
 
