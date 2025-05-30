@@ -3,7 +3,7 @@ import * as formView from "./formView.js";
 import * as deleteView from "../delete/deleteView.js";
 import * as model from "../todos/model.js";
 import * as statusView from "../status/statusView.js";
-
+formView.renderList(model.getFilteredTasks());/// DELETE//////
 formView.dialogForm.addEventListener("submit", (event) => {
   event.preventDefault();
 

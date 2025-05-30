@@ -29,6 +29,6 @@ statusView.listHero.addEventListener('change', (event) => {
     return;
   };
 
-  model.changeStatus(Number(taskId));
+  model.toggleTaskStatus(Number(taskId));
   formView.renderList(model.getFilteredTasks());
 });

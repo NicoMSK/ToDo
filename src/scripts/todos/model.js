@@ -48,12 +48,25 @@ function deleteTodo(itemId) {
   };
 };
 
-function changeStatus(itemId) {
-  const task = todos.find((item) =>
-    item.id === itemId);
+function getTaskById(itemId) {
+  const task = todos.find((item) => item.id === itemId);
+
+  return task
+};
+
+function toggleTaskStatus(itemId) {
+  const task = getTaskById(itemId);
 
   if (task) {
     task.isComplete = !task.isComplete;
+  };
+};
+
+function updateTitle(itemId, newTitle) {
+  const task = getTaskById(itemId);
+
+  if (task) {
+    task.title = newTitle;
   };
 };
 
@@ -82,5 +95,7 @@ function getFilteredTasks() {
   };
 };
 
-export { todos, addTodo, deleteTodo, changeStatus, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS };
+
+
+export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, toggleTaskStatus, updateTitle };
 
