@@ -59,7 +59,7 @@
 .nav__select-btn {
   @include button-reset;
 
-  padding: 8px;
+  padding: 11px 7px;
   width: 135px;
   display: flex;
   align-items: center;
@@ -103,7 +103,6 @@
 .nav__select-list {
   padding: 5px 0;
   width: 100%;
-  height: 90px;
   position: absolute;
   display: none;
   background-color: $white;

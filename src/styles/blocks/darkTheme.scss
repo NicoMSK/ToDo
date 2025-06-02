@@ -23,7 +23,7 @@
   color: $white;
 }
 
-.dark__theme .hero__input:checked + .hero__input-text {
+.dark__theme .hero__input-text--checked {
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   text-decoration: line-through;
