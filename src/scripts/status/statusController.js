@@ -12,10 +12,16 @@ statusView.buttonSelect.addEventListener('click', () => {
 });
 
 statusView.listSelect.addEventListener('click', (event) => {
-  const status = statusView.getFilterValueFromClickEvent(event);
-  model.setCurrentFilterValue(status);
+  const datasetValue = statusView.getFilterValueFromClickEvent(event);
+  const filterValue = model.FILTER[datasetValue];
 
-  statusView.setValueForFilterSelect(status);
+  if (!filterValue) {
+    throw new Error(`Неизвестный фильтр: ${datasetValue}`);
+  };
+
+  model.setCurrentFilterValue(filterValue);
+
+  statusView.setValueForFilterSelect(filterValue);
 
   formView.renderList(model.getFilteredTasks());
 
@@ -29,6 +35,6 @@ statusView.listHero.addEventListener('change', (event) => {
     return;
   };
 
-  model.toggleTaskStatus(Number(taskId));
+  model.changeStatus(Number(taskId));
   formView.renderList(model.getFilteredTasks());
 });
