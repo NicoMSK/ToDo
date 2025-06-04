@@ -8,7 +8,7 @@ export const itemSelect = document.querySelectorAll(".nav__select-item");
 
 export function createCustomSelectList(filterObject, labelObject) {
   for (const key in filterObject) {
-    let item = document.createElement("li");
+    const item = document.createElement("li");
     item.classList.add("nav__select-item");
     item.dataset.value = filterObject[key];
     item.textContent = labelObject[key];

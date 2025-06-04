@@ -24,7 +24,7 @@ function switchTodoItemToEditMode(event) {
   editInputText.focus();
 }
 
-export function saveEditedTaskText(event) {
+function saveEditedTaskText(event) {
   const { todoItem, spanText, editInputText } = getTodoItems(event);
 
   spanText.innerText = editInputText.value;
@@ -33,14 +33,38 @@ export function saveEditedTaskText(event) {
   return spanText.innerText
 };
 
+export function keyEnterSaveEditedTaskText(event) {
+  if (event.target.closest('.hero__input-edit')) {
+    const itemHero = event.target.closest('.hero__item');
+    const spanTextEnter = itemHero.querySelector('.hero__input-text');
+    const editInputTextEnter = itemHero.querySelector('.hero__input-edit');
+
+    spanTextEnter.innerText = editInputTextEnter.value;
+    itemHero.classList.remove('hero__item--edit');
+
+    return spanTextEnter.innerText
+  };
+};
+
 function cancelEditMode(event) {
   const { todoItem } = getTodoItems(event);
 
   todoItem.classList.remove('hero__item--edit');
 };
 
+export function cancelEditEsc(event) {
+  if (event.target.closest('.hero__input-edit')) {
+    const itemHero = event.target.closest('.hero__item');
+    itemHero.classList.remove('hero__item--edit');
+  };
+};
+
 export function getTaskId(event) {
   if (event.target.closest('.hero__btn-done')) {
+    return taskView.getTaskIdFromClickEvent(event);
+  };
+
+  if (event.target.closest('.hero__input-edit')) {
     return taskView.getTaskIdFromClickEvent(event);
   };
 
