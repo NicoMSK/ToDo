@@ -4,17 +4,20 @@ import * as formView from '../form/formView.js';
 
 deleteView.addsPictureWhenNoTasks();
 
-deleteView.todoList.addEventListener('click', (event) => {
+export function deleteTask(event) {
   const taskId = deleteView.getClickedTaskId(event);
   if (!taskId) return;
 
   model.deleteTodo(Number(taskId));
 
-  const currentStatus = model.getCurrentFilterValue();
-  formView.renderList(model.getFilteredTasks(currentStatus));
+  const currentValue = model.getCurrentFilterValue();
+
+  formView.renderList(model.getFilteredTasks(currentValue));
+
   deleteView.deleteTask(event);
+
   deleteView.addsPictureWhenNoTasks();
-});
+};
 
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
   deleteView.returnsDeletedTask();

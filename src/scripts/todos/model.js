@@ -54,19 +54,16 @@ function getTaskById(itemId) {
   return task
 };
 
-function toggleTaskStatus(itemId) {
+function updateTaskProperty(itemId, property, newTitle) {
   const task = getTaskById(itemId);
 
-  if (task) {
-    task.isComplete = !task.isComplete;
-  };
-};
-
-function updateTitle(itemId, newTitle) {
-  const task = getTaskById(itemId);
-
-  if (task) {
-    task.title = newTitle;
+  switch (property) {
+    case "isComlete":
+      task.isComplete = !task.isComplete;
+      break;
+    case "title":
+      task.title = newTitle;
+      break;
   };
 };
 
@@ -97,5 +94,5 @@ function getFilteredTasks() {
 
 
 
-export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, toggleTaskStatus, updateTitle };
+export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty };
 

@@ -11,7 +11,7 @@ export function addsPictureWhenNoTasks() {
     heroImg.classList.remove('hero__img-wrapper--hidden');
   } else {
     heroImg.classList.add('hero__img-wrapper--hidden');
-  }
+  };
 };
 
 function getTimerStarter() {
@@ -45,10 +45,13 @@ const startTimerButton = getTimerStarter();
 
 export function deleteTask(event) {
   const deleteButton = event.target.closest('.hero__btn-delete');
+
   if (!deleteButton || deleteButton.dataset.type !== 'delete') return;
 
   deleteButton.closest('.hero__item').remove();
+
   cancelTaskDeletionButton.classList.remove('hero__btn-cancel-del--hidden');
+
   startTimerButton();
 };
 
@@ -59,6 +62,7 @@ export function returnsDeletedTask() {
 export function getClickedTaskId(event) {
   if (event.target.closest('.hero__btn-delete')) {
     return taskView.getTaskIdFromClickEvent(event);
-  }
+  };
+
   return null;
 };

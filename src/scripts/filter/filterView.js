@@ -1,6 +1,5 @@
 import * as taskView from "../task/taskView.js";
 
-export const listHero = document.querySelector(".hero__list");
 export const buttonSelect = document.querySelector(".nav__select-btn");
 export const wrapperSelect = document.querySelector(".nav__select-wrapper");
 export const listSelect = document.querySelector(".nav__select-list");
@@ -16,12 +15,16 @@ export function createCustomSelectList(filterObject, labelObject) {
   };
 };
 
-export function toggleTaskStatusList() {
+export function toggleTaskFilterList() {
   wrapperSelect.classList.toggle("nav__select-wrapper--open");
 };
 
+export function getFilterValueFromClickEvent(event) {
+  return event.target.dataset.value;
+};
+
 export function setValueForFilterSelect(value) {
-  const selectValue = document.querySelector(`.nav__select-item[data-value="${value}"]`);
+  const selectValue = listSelect.querySelector(`.nav__select-item[data-value="${value}"]`);
 
   buttonSelect.textContent = selectValue.textContent;
 };
@@ -31,8 +34,4 @@ export function getTaskId(event) {
     return taskView.getTaskIdFromClickEvent(event);
   };
   return null;
-};
-
-export function getFilterValueFromClickEvent(event) {
-  return event.target.dataset.value;
 };
