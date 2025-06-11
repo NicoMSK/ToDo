@@ -1,5 +1,3 @@
-import * as taskView from '../task/taskView.js';
-
 export const listHero = document.querySelector(".hero__list");
 
 function getClickedButton(event) {
@@ -17,13 +15,27 @@ export function getTodoItems(event) {
 }
 
 export function switchTodoItemToEditMode(event) {
-  const { todoItem, spanText, editInputText } = getTodoItems(event); /// использую диструктуризацию
+  const { todoItem, spanText, editInputText } = getTodoItems(event);
 
   todoItem.classList.add('hero__item--edit');
   editInputText.value = spanText.innerText;
   editInputText.focus();
 };
 
+// export function validate(inputElement) {
+//   if (inputElement.value.trim() === "") {
+//     return null;
+//   };
+
+//   return true
+// }
+
+function updateUI(params) {
+  errorElement.classList.remove("hero__input-error--hidden");
+  taskItem.classList.remove("hero__item--edit");
+
+}
+//| Надо исправить, разнести логику
 function validateAndCompleteEdit(taskItem, errorElement, inputElement) {
   if (inputElement.value.trim() === "") {
     errorElement.classList.remove("hero__input-error--hidden");
@@ -35,40 +47,19 @@ function validateAndCompleteEdit(taskItem, errorElement, inputElement) {
   return inputElement.value
 };
 
-export function handleEditEvent(event, isEnterKey = false) {
-  if (isEnterKey) {
-    const todoItem = event.target.closest('.hero__item');
-    const editInputText = todoItem.querySelector(".hero__input-edit");
-    const errorMessage = todoItem.querySelector(".hero__input-error");
+export function handleEditEvent({ event }) {
+  const todoItem = event.target.closest('.hero__item');
+  const editInputText = todoItem.querySelector(".hero__input-edit");
+  const errorMessage = todoItem.querySelector(".hero__input-error");
 
-    return validateAndCompleteEdit(todoItem, errorMessage, editInputText);
-  } else {
-    const { todoItem, editInputText } = getTodoItems(event);
-    const errorMessage = todoItem.querySelector(".hero__input-error");
-
-    return validateAndCompleteEdit(todoItem, errorMessage, editInputText);
-  };
+  return validateAndCompleteEdit(todoItem, errorMessage, editInputText);
 };
 
-export function cancelEditMode(event, isEcsKey = false) {
-  if (isEcsKey) {
-    const itemHero = event.target.closest('.hero__item');
-    itemHero.classList.remove('hero__item--edit');
-  } else {
-    const { todoItem } = getTodoItems(event);
-    todoItem.classList.remove('hero__item--edit');
-  };
-};
+export function cancelEditMode({ event }) {
+  const todoItem = event.target.closest('.hero__item');
+  const errorMessage = todoItem.querySelector(".hero__input-error");
 
-export function getTaskId(event) {
-  if (event.target.closest('.hero__btn-done')) {
-    return taskView.getTaskIdFromClickEvent(event);
-  };
-
-  if (event.target.closest('.hero__input-edit')) {
-    return taskView.getTaskIdFromClickEvent(event);
-  };
-
-  return null;
+  errorMessage.classList.add('hero__input-error--hidden');
+  todoItem.classList.remove('hero__item--edit');
 };
 

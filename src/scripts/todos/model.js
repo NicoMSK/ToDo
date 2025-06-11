@@ -4,21 +4,23 @@ const TODO_EXAMPLE = {
   title: "Купить хлеба"
 }
 
-const todos = [{
-  id: 123,
-  isComplete: false,
-  title: "Купить хлеба"
-},
-{
-  id: 124,
-  isComplete: false,
-  title: "Купить "
-},
-{
-  id: 125,
-  isComplete: false,
-  title: " хлеба"
-}];
+const todos = [
+  {
+    id: 123,
+    isComplete: false,
+    title: "Купить хлеба"
+  },
+  {
+    id: 124,
+    isComplete: false,
+    title: "Купить "
+  },
+  {
+    id: 125,
+    isComplete: false,
+    title: " хлеба"
+  }
+];
 
 const FILTER = {
   all: "all",
@@ -54,7 +56,7 @@ function getTaskById(itemId) {
   return task
 };
 
-function updateTaskProperty(itemId, property, newTitle) {
+function updateTaskProperty({ itemId, property, title }) {
   const task = getTaskById(itemId);
 
   switch (property) {
@@ -62,7 +64,7 @@ function updateTaskProperty(itemId, property, newTitle) {
       task.isComplete = !task.isComplete;
       break;
     case "title":
-      task.title = newTitle;
+      task.title = title;
       break;
   };
 };
@@ -92,7 +94,9 @@ function getFilteredTasks() {
   };
 };
 
-
+export function validateTitle(title) {
+  return title.trim() !== "";
+};
 
 export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty };
 

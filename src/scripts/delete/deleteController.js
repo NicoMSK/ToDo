@@ -1,11 +1,10 @@
 import * as deleteView from './deleteView.js';
 import * as model from '../todos/model.js';
 import * as formView from '../form/formView.js';
-
-deleteView.addsPictureWhenNoTasks();
+import * as taskView from "../task/taskView.js";
 
 export function deleteTask(event) {
-  const taskId = deleteView.getClickedTaskId(event);
+  const taskId = taskView.getTaskIdFromClickEvent(event);
   if (!taskId) return;
 
   model.deleteTodo(Number(taskId));
@@ -14,13 +13,10 @@ export function deleteTask(event) {
 
   formView.renderList(model.getFilteredTasks(currentValue));
 
-  deleteView.deleteTask(event);
-
-  deleteView.addsPictureWhenNoTasks();
+  deleteView.startTimerButton();
 };
 
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
   deleteView.returnsDeletedTask();
 });
-
 

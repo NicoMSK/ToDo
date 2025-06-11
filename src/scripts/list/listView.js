@@ -9,3 +9,4 @@ export function getClickedElementType(clickedNode) {
 
   return null;
 };
+

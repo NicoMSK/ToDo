@@ -1,33 +1,30 @@
 import * as editView from './editView.js';
 import * as formView from '../form/formView.js';
 import * as model from '../todos/model.js';
+import * as taskView from "../task/taskView.js";
 
 export function editHandler(event) {
   editView.switchTodoItemToEditMode(event);
 };
 
 function saveAndUpdateTask(taskId, newTitle) {
-  if (!taskId) {
+  if (!taskId || newTitle === null) {
     return;
   };
 
-  if (newTitle === null) {
-    return;
-  };
-
-  model.updateTaskProperty(Number(taskId), "title", newTitle);
+  model.updateTaskProperty({ itemId: Number(taskId), property: "title", title: newTitle });
   formView.renderList(model.getFilteredTasks());
 };
 
 export function saveEditedTaskText(event) {
-  const taskId = editView.getTaskId(event);
-  const newTitle = editView.handleEditEvent(event);
+  const taskId = taskView.getTaskIdFromClickEvent(event);
+  const newTitle = editView.handleEditEvent({ event });
 
   saveAndUpdateTask(taskId, newTitle);
 };
 
 export function cancelEditTask(event) {
-  editView.cancelEditMode(event);
+  editView.cancelEditMode({ event });
 };
 
 export function handleEditKeyDown(event) {
@@ -36,16 +33,26 @@ export function handleEditKeyDown(event) {
   const ENTER = 13;
 
   if (keyCode === ESC) {
-    editView.cancelEditMode(event, true);
+    editView.cancelEditMode({ event });
   };
 
   if (keyCode === ENTER) {
     event.preventDefault();
 
-    const taskId = editView.getTaskId(event);
-    const newTitle = editView.handleEditEvent(event, true);
+    const taskId = taskView.getTaskIdFromClickEvent(event);
+    const newTitle = editView.handleEditEvent({ event });
 
     saveAndUpdateTask(taskId, newTitle);
   };
 };
 
+export function toggleTaskCompletion(event) {
+  const taskId = taskView.getTaskIdFromClickEvent(event);
+  if (!taskId) {
+    return;
+  };
+
+  model.updateTaskProperty({ itemId: Number(taskId), property: "isComlete" });
+
+  formView.renderList(model.getFilteredTasks());
+};

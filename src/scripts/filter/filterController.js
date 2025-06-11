@@ -1,7 +1,6 @@
 import * as filterView from "./filterView.js";
 import * as model from "../todos/model.js";
 import * as formView from "../form/formView.js";
-import * as deleteView from '../delete/deleteView.js';
 
 filterView.createCustomSelectList(model.FILTER, model.FILTER_LABELS);
 
@@ -25,20 +24,5 @@ filterView.listSelect.addEventListener('click', (event) => {
 
   formView.renderList(model.getFilteredTasks());
 
-  deleteView.addsPictureWhenNoTasks();
-
   filterView.toggleTaskFilterList();
 });
-
-export function toggleTaskCompletion(event) {
-  const taskId = filterView.getTaskId(event);
-  if (!taskId) {
-    return;
-  };
-
-  model.updateTaskProperty(Number(taskId), "isComlete");
-
-  formView.renderList(model.getFilteredTasks());
-
-  deleteView.addsPictureWhenNoTasks();
-};

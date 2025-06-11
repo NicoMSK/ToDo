@@ -1,6 +1,5 @@
 import * as listView from './listView.js';
 import * as editController from '../edit/editController.js';
-import * as filterController from '../filter/filterController.js';
 import * as deleteController from '../delete/deleteController.js';
 
 listView.listHero.addEventListener("click", (event) => {
@@ -21,14 +20,17 @@ listView.listHero.addEventListener("click", (event) => {
       editController.cancelEditTask(event);
       break;
     case "checkbox":
-      filterController.toggleTaskCompletion(event);
+      editController.toggleTaskCompletion(event);
       break;
     case "delete":
       deleteController.deleteTask(event);
       break;
+    default:
+      throw new Error("Ошибка, такой кнопки не существует");
   };
 });
 
 listView.listHero.addEventListener("keydown", (event) => {
   editController.handleEditKeyDown(event);
 });
+

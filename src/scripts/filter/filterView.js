@@ -1,5 +1,3 @@
-import * as taskView from "../task/taskView.js";
-
 export const buttonSelect = document.querySelector(".nav__select-btn");
 export const wrapperSelect = document.querySelector(".nav__select-wrapper");
 export const listSelect = document.querySelector(".nav__select-list");
@@ -29,9 +27,3 @@ export function setValueForFilterSelect(value) {
   buttonSelect.textContent = selectValue.textContent;
 };
 
-export function getTaskId(event) {
-  if (event.target.matches('.hero__input[type="checkbox"]')) {
-    return taskView.getTaskIdFromClickEvent(event);
-  };
-  return null;
-};
