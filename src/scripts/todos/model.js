@@ -95,11 +95,10 @@ function getFilteredTasks() {
   };
 };
 
-
-export function validateTitle(title) {
+function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty };
+export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle };
 
 
