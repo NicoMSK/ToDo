@@ -50,6 +50,7 @@ function deleteTodo(itemId) {
   };
 };
 
+
 function getTaskById(itemId) {
   const task = todos.find((item) => item.id === itemId);
 
@@ -94,9 +95,11 @@ function getFilteredTasks() {
   };
 };
 
+
 export function validateTitle(title) {
   return title.trim() !== "";
 };
 
 export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty };
+
 

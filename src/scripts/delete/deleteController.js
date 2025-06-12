@@ -16,6 +16,7 @@ export function deleteTask(event) {
   deleteView.startTimerButton();
 };
 
+
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
   deleteView.showCancelTaskDeleteButton();
 });

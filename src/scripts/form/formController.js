@@ -4,6 +4,7 @@ import * as model from "../todos/model.js";
 import * as filterView from "../filter/filterView.js";
 formView.renderList(model.getFilteredTasks());/// DELETE//////
 formView.addsPictureWhenNoTasks(model.todos.length);
+
 formView.dialogForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -15,6 +16,7 @@ formView.dialogForm.addEventListener("submit", (event) => {
 
   model.setCurrentFilterValue(model.FILTER.all);
   formView.renderList(model.getFilteredTasks());
+
   filterView.setValueForFilterSelect(model.getCurrentFilterValue());
 
   dialogView.closeDialog();
