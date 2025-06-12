@@ -1,10 +1,10 @@
-export const todoList = document.querySelector(".hero__list");
+export const listHero = document.querySelector(".hero__list");
 
 function getClickedButton(event) {
   return event.target.closest('[data-type]');
 };
 
-function getTodoItems(event) {
+export function getTodoItems(event) {
   const clickedButton = getClickedButton(event);
 
   const todoItem = clickedButton.closest('.hero__item');
@@ -14,50 +14,44 @@ function getTodoItems(event) {
   return { todoItem, spanText, editInputText }
 }
 
-function switchTodoItemToEditMode(event) {
-  const { todoItem, spanText, editInputText } = getTodoItems(event); /// использую диструктуризацию
+export function switchTodoItemToEditMode(event) {
+  const { todoItem, spanText, editInputText } = getTodoItems(event);
 
   todoItem.classList.add('hero__item--edit');
   editInputText.value = spanText.innerText;
   editInputText.focus();
-}
-
-function saveEditedTaskText(event) {
-  const { todoItem, spanText, editInputText } = getTodoItems(event);
-
-  spanText.innerText = editInputText.value;
-  todoItem.classList.remove('hero__item--edit');
-}
-
-function cancelEditMode(event) {
-  const { todoItem } = getTodoItems(event);
-
-  todoItem.classList.remove('hero__item--edit');
-}
-
-export function checkIfElementHasClass(event) {
-  const clickedButton = getClickedButton(event);
-  if (!clickedButton) return;
-
-  const btnType = event.target.dataset.type;
-  const todoItem = clickedButton.closest('.hero__item');
-
-  switch (btnType) {
-    case 'edit':
-      switchTodoItemToEditMode(event);
-      todoItem.classList.add('hero__item--edit');
-      break;
-    case 'done':
-      saveEditedTaskText(event);
-      todoItem.classList.remove('hero__item--edit');
-      break;
-    case 'cancel':
-      cancelEditMode(event);
-      todoItem.classList.remove('hero__item--edit');
-      break;
-    case 'delete':
-      break;
-    default:
-      throw new Error('Ошибка, кнопка не найдена')
-  }
 };
+
+function updateUI(params) {
+  errorElement.classList.remove("hero__input-error--hidden");
+  taskItem.classList.remove("hero__item--edit");
+
+}
+
+function validateAndCompleteEdit(taskItem, errorElement, inputElement) {
+  if (inputElement.value.trim() === "") {
+    errorElement.classList.remove("hero__input-error--hidden");
+    return null;
+  };
+
+  taskItem.classList.remove("hero__item--edit");
+
+  return inputElement.value
+};
+
+export function handleEditEvent({ event }) {
+  const todoItem = event.target.closest('.hero__item');
+  const editInputText = todoItem.querySelector(".hero__input-edit");
+  const errorMessage = todoItem.querySelector(".hero__input-error");
+
+  return validateAndCompleteEdit(todoItem, errorMessage, editInputText);
+};
+
+export function cancelEditMode({ event }) {
+  const todoItem = event.target.closest('.hero__item');
+  const errorMessage = todoItem.querySelector(".hero__input-error");
+
+  errorMessage.classList.add('hero__input-error--hidden');
+  todoItem.classList.remove('hero__item--edit');
+};
+

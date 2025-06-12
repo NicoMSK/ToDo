@@ -1,8 +1,9 @@
 import * as dialogView from "../dialog/dialogView.js";
 import * as formView from "./formView.js";
-import * as deleteView from "../delete/deleteView.js";
 import * as model from "../todos/model.js";
-import * as statusView from "../status/statusView.js";
+import * as filterView from "../filter/filterView.js";
+formView.renderList(model.getFilteredTasks());/// DELETE//////
+formView.addsPictureWhenNoTasks(model.todos.length);
 
 formView.dialogForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -15,9 +16,9 @@ formView.dialogForm.addEventListener("submit", (event) => {
 
   model.setCurrentFilterValue(model.FILTER.all);
   formView.renderList(model.getFilteredTasks());
-  statusView.setValueForFilterSelect(model.getCurrentFilterValue());
 
-  deleteView.addsPictureWhenNoTasks();
+  filterView.setValueForFilterSelect(model.getCurrentFilterValue());
+
   dialogView.closeDialog();
 });
 

@@ -52,7 +52,6 @@
   margin-right: 17px;
   width: 26px;
   height: 26px;
-  flex: 1 0 auto;
   border: 1px solid $purple;
   border-radius: 2px;
   appearance: none;
@@ -76,6 +75,26 @@
       transition: all 500ms ease-out;
     }
   }
+}
+
+
+.hero__input-error {
+  display: block;
+  min-height: 1rem;
+  font-size: 14px;
+  color: red;
+  transition: opacity 0.3s ease;
+
+  &--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.hero__input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero__input-text {

@@ -5,6 +5,7 @@ export const inputDialog = dialogForm.querySelector(".dialog__input");
 export const heroList = document.querySelector(".hero__list");
 export const taskTemplate = document.querySelector("#task-template").content;
 export const itemTemplate = taskTemplate.querySelector(".hero__item");
+const heroImg = document.querySelector(".hero__img-wrapper");
 
 export function getNewTaskTitle() {
   const taskTextInput = inputDialog.value.trim();
@@ -18,8 +19,18 @@ export function getNewTaskTitle() {
   return taskTextInput;
 };
 
+export function addsPictureWhenNoTasks(tasksAmount) {
+  if (tasksAmount === 0) {
+    heroImg.classList.remove('hero__img-wrapper--hidden');
+  } else {
+    heroImg.classList.add('hero__img-wrapper--hidden');
+  };
+};
+
 export function renderList(tasksArray) {
   heroList.innerHTML = "";
+
+  addsPictureWhenNoTasks(tasksArray.length); /// можно оптимизировать, чтоб не делать лишние ремувы
 
   for (let i = 0; i < tasksArray.length; i++) {
     const newTaskItem = itemTemplate.cloneNode(true);

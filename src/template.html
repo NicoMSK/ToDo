@@ -68,9 +68,13 @@
       <template id="task-template">
         <li class="hero__item">
           <label class="hero__label">
-            <input class="hero__input" type="checkbox">
-            <span class="hero__input-text"></span>
-            <input class="hero__input-edit" type="text" value="">
+            <input class="hero__input" data-type="checkbox" type="checkbox">
+            <div class="hero__input-wrapper">
+              <span class="hero__input-text"></span>
+              <input class="hero__input-edit" type="text" value="">
+              <span class="hero__input-error hero__input-error--hidden">Поле
+                не может быть пустым</span>
+            </div>
           </label>
           <div class="hero__btn-wrapper">
             <button class="hero__btn-edit" data-type="edit" type="button">

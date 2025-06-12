@@ -1,18 +1,8 @@
 import * as taskView from "../task/taskView.js";
 
 export const todoList = document.querySelector(".hero__list");
-export const heroItems = todoList.children;
-export const heroImg = document.querySelector(".hero__img-wrapper");
-export const cancelTaskDeletionButton = document.querySelector('.hero__btn-cancel-del');
-export const countButton = document.querySelector('.hero__btn-count');
-
-export function addsPictureWhenNoTasks() {
-  if (heroItems.length === 0) {
-    heroImg.classList.remove('hero__img-wrapper--hidden');
-  } else {
-    heroImg.classList.add('hero__img-wrapper--hidden');
-  }
-};
+export const cancelTaskDeletionButton = document.querySelector(".hero__btn-cancel-del");
+const countButton = document.querySelector(".hero__btn-count");
 
 function getTimerStarter() {
 
@@ -21,13 +11,15 @@ function getTimerStarter() {
   function startTimerForRemoteTaskReturnButton() {
     clearTimeout(startingTimer);
 
+    cancelTaskDeletionButton.classList.remove("hero__btn-cancel-del--hidden");
+
     let count = 5;
 
     function decreaseCounter() {
       countButton.textContent = count;
 
       if (count <= 0) {
-        cancelTaskDeletionButton.classList.add('hero__btn-cancel-del--hidden');
+        cancelTaskDeletionButton.classList.add("hero__btn-cancel-del--hidden");
       }
       count--;
 
@@ -41,24 +33,8 @@ function getTimerStarter() {
   return startTimerForRemoteTaskReturnButton;
 };
 
-const startTimerButton = getTimerStarter();
+export const startTimerButton = getTimerStarter();
 
-export function deleteTask(event) {
-  const deleteButton = event.target.closest('.hero__btn-delete');
-  if (!deleteButton || deleteButton.dataset.type !== 'delete') return;
-
-  deleteButton.closest('.hero__item').remove();
-  cancelTaskDeletionButton.classList.remove('hero__btn-cancel-del--hidden');
-  startTimerButton();
-};
-
-export function returnsDeletedTask() {
-  cancelTaskDeletionButton.classList.add('hero__btn-cancel-del--hidden');
-};
-
-export function getClickedTaskId(event) {
-  if (event.target.closest('.hero__btn-delete')) {
-    return taskView.getTaskIdFromClickEvent(event);
-  }
-  return null;
+export function showCancelTaskDeleteButton() {
+  cancelTaskDeletionButton.classList.add("hero__btn-cancel-del--hidden");
 };
