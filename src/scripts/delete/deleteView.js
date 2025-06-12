@@ -35,6 +35,6 @@ function getTimerStarter() {
 
 export const startTimerButton = getTimerStarter();
 
-export function returnsDeletedTask() {
+export function showCancelTaskDeleteButton() {
   cancelTaskDeletionButton.classList.add("hero__btn-cancel-del--hidden");
 };

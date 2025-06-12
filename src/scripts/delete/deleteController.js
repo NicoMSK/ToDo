@@ -17,6 +17,6 @@ export function deleteTask(event) {
 };
 
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
-  deleteView.returnsDeletedTask();
+  deleteView.showCancelTaskDeleteButton();
 });
 

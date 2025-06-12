@@ -22,20 +22,12 @@ export function switchTodoItemToEditMode(event) {
   editInputText.focus();
 };
 
-// export function validate(inputElement) {
-//   if (inputElement.value.trim() === "") {
-//     return null;
-//   };
-
-//   return true
-// }
-
 function updateUI(params) {
   errorElement.classList.remove("hero__input-error--hidden");
   taskItem.classList.remove("hero__item--edit");
 
 }
-//| Надо исправить, разнести логику
+
 function validateAndCompleteEdit(taskItem, errorElement, inputElement) {
   if (inputElement.value.trim() === "") {
     errorElement.classList.remove("hero__input-error--hidden");

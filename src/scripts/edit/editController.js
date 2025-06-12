@@ -7,7 +7,7 @@ export function editHandler(event) {
   editView.switchTodoItemToEditMode(event);
 };
 
-function saveAndUpdateTask(taskId, newTitle) {
+function saveAndUpdateTaskTitle(taskId, newTitle) {
   if (!taskId || newTitle === null) {
     return;
   };
@@ -20,7 +20,7 @@ export function saveEditedTaskText(event) {
   const taskId = taskView.getTaskIdFromClickEvent(event);
   const newTitle = editView.handleEditEvent({ event });
 
-  saveAndUpdateTask(taskId, newTitle);
+  saveAndUpdateTaskTitle(taskId, newTitle);
 };
 
 export function cancelEditTask(event) {
@@ -42,7 +42,7 @@ export function handleEditKeyDown(event) {
     const taskId = taskView.getTaskIdFromClickEvent(event);
     const newTitle = editView.handleEditEvent({ event });
 
-    saveAndUpdateTask(taskId, newTitle);
+    saveAndUpdateTaskTitle(taskId, newTitle);
   };
 };
 
