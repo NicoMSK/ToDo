@@ -9,15 +9,17 @@ export function deleteTask(event) {
 
   model.deleteTodo(Number(taskId));
 
-  const currentValue = model.getCurrentFilterValue();
-
-  formView.renderList(model.getFilteredTasks(currentValue));
+  const currentValueFilter = model.getCurrentFilterValue();
+  formView.renderList(model.getFilteredTasks(currentValueFilter));
 
   deleteView.startTimerButton();
 };
 
-
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
+  model.returnDeletedTask();
+
   deleteView.showCancelTaskDeleteButton();
+
+  formView.renderList(model.getFilteredTasks());
 });
 

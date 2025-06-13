@@ -5,7 +5,7 @@ export function getTodoItems(event) {
   const errorMessage = todoItem.querySelector(".hero__input-error");
 
   return { todoItem, spanText, editInputText, errorMessage }
-}
+};
 
 export function switchTodoItemToEditMode(event) {
   const { todoItem, spanText, editInputText } = getTodoItems(event);
