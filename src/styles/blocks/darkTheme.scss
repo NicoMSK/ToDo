@@ -7,12 +7,21 @@
 }
 
 .dark__theme .nav__input {
+  color: $white;
   background-image: url("/src/icons/sprite.svg#search-white");
   border: 1px solid $white;
 
   &::placeholder {
     color: #666;
   }
+}
+
+.dark__theme .nav__select-list {
+  background-color: $black;
+}
+
+.dark__theme .nav__select-item {
+  color: $white;
 }
 
 .dark__theme .nav__theme-btn {

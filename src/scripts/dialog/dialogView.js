@@ -25,5 +25,6 @@ export function closeOnBackDropClick(event) {
   const isClickedOnBackDrop = target === currentTarget;
   if (isClickedOnBackDrop) {
     closeDialog();
-  }
-}
+    return true;
+  };
+};

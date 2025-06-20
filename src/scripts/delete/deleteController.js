@@ -2,6 +2,7 @@ import * as deleteView from './deleteView.js';
 import * as model from '../todos/model.js';
 import * as formView from '../form/formView.js';
 import * as taskView from "../task/taskView.js";
+import * as searchView from "../search/searchView.js";
 
 export function deleteTask(event) {
   const taskId = taskView.getTaskIdFromClickEvent(event);
@@ -14,8 +15,8 @@ export function deleteTask(event) {
   formView.renderList(model.getFilteredTasks(currentValue));
 
   deleteView.startTimerButton();
+  searchView.searchInput.value = '';
 };
-
 
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
   deleteView.showCancelTaskDeleteButton();

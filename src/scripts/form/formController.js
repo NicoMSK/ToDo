@@ -2,6 +2,7 @@ import * as dialogView from "../dialog/dialogView.js";
 import * as formView from "./formView.js";
 import * as model from "../todos/model.js";
 import * as filterView from "../filter/filterView.js";
+
 formView.renderList(model.getFilteredTasks());/// DELETE//////
 formView.addsPictureWhenNoTasks(model.todos.length);
 

@@ -18,7 +18,7 @@ const todos = [
   {
     id: 125,
     isComplete: false,
-    title: " хлеба"
+    title: "хлеба"
   }
 ];
 
@@ -95,11 +95,16 @@ function getFilteredTasks() {
   };
 };
 
-
-export function validateTitle(title) {
+function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty };
+function searchTasks(inputValue) {
+  return todos.filter((task) =>
+    task.title.toLocaleLowerCase().includes(inputValue)
+  );
+};
+
+export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, searchTasks };
 
 
