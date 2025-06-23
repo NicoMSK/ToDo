@@ -10,6 +10,7 @@
   width: 100%;
   max-width: 595px;
   padding: 8px 16px;
+  padding-left: 40px;
   font-family: $second-font;
   font-weight: 500;
   font-size: 16px;
@@ -19,7 +20,7 @@
   background-image: url("/src/icons/sprite.svg#search");
   background-color: inherit;
   background-size: 21px 21px;
-  background-position: 98%;
+  background-position: 2%;
   background-repeat: no-repeat;
   outline: none;
 
@@ -30,10 +31,6 @@
   &:focus-visible {
     box-shadow: 4px 5px 24px rgba(108, 99, 255, 0.2);
   }
-}
-
-.nav__input[type="search"]::-webkit-search-cancel-button {
-  display: none;
 }
 
 .nav__wrapper {
