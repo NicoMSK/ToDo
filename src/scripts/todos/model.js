@@ -46,8 +46,8 @@ function getIndexTask(itemId) {
   return todos.findIndex((todoInArray) => todoInArray.id === itemId);
 };
 
-let lastDeletedTask;
-let lastDeletedTaskIndex
+let lastDeletedTask = null;
+let lastDeletedTaskIndex = -1;
 
 function deleteTodo(itemId) {
   lastDeletedTaskIndex = getIndexTask(itemId);
@@ -55,8 +55,6 @@ function deleteTodo(itemId) {
   if (lastDeletedTaskIndex !== -1) {
     lastDeletedTask = todos.splice(lastDeletedTaskIndex, 1)[0];
   };
-
-  return { lastDeletedTask, lastDeletedTaskIndex }
 };
 
 function returnDeletedTask() {
