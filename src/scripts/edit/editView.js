@@ -1,18 +1,11 @@
-export const listHero = document.querySelector(".hero__list");
-
-function getClickedButton(event) {
-  return event.target.closest('[data-type]');
-};
-
 export function getTodoItems(event) {
-  const clickedButton = getClickedButton(event);
-
-  const todoItem = clickedButton.closest('.hero__item');
+  const todoItem = event.target.closest('.hero__item');
   const spanText = todoItem.querySelector('.hero__input-text');
   const editInputText = todoItem.querySelector('.hero__input-edit');
+  const errorMessage = todoItem.querySelector(".hero__input-error");
 
-  return { todoItem, spanText, editInputText }
-}
+  return { todoItem, spanText, editInputText, errorMessage }
+};
 
 export function switchTodoItemToEditMode(event) {
   const { todoItem, spanText, editInputText } = getTodoItems(event);
@@ -22,34 +15,22 @@ export function switchTodoItemToEditMode(event) {
   editInputText.focus();
 };
 
-function updateUI(params) {
-  errorElement.classList.remove("hero__input-error--hidden");
-  taskItem.classList.remove("hero__item--edit");
+export function showEditValidationError(event) {
+  const { todoItem, errorMessage } = getTodoItems(event);
 
-}
-
-function validateAndCompleteEdit(taskItem, errorElement, inputElement) {
-  if (inputElement.value.trim() === "") {
-    errorElement.classList.remove("hero__input-error--hidden");
-    return null;
-  };
-
-  taskItem.classList.remove("hero__item--edit");
-
-  return inputElement.value
+  errorMessage.classList.remove("hero__input-error--hidden");
+  todoItem.classList.add("hero__item--edit");
 };
 
 export function handleEditEvent({ event }) {
-  const todoItem = event.target.closest('.hero__item');
-  const editInputText = todoItem.querySelector(".hero__input-edit");
-  const errorMessage = todoItem.querySelector(".hero__input-error");
+  const { todoItem, editInputText } = getTodoItems(event);
 
-  return validateAndCompleteEdit(todoItem, errorMessage, editInputText);
+  todoItem.classList.remove("hero__item--edit");
+  return editInputText.value
 };
 
 export function cancelEditMode({ event }) {
-  const todoItem = event.target.closest('.hero__item');
-  const errorMessage = todoItem.querySelector(".hero__input-error");
+  const { todoItem, errorMessage } = getTodoItems(event);
 
   errorMessage.classList.add('hero__input-error--hidden');
   todoItem.classList.remove('hero__item--edit');

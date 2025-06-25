@@ -1,7 +1,7 @@
 const TODO_EXAMPLE = {
   id: 123,
   isComplete: false,
-  title: "Купить хлеба"
+  title: "Купить молокА"
 }
 
 const todos = [
@@ -42,14 +42,26 @@ function addTodo(newTaskTitle) {
   });
 };
 
-function deleteTodo(itemId) {
-  const indexOfTodoToDelete = todos.findIndex((todoInArray) => todoInArray.id === itemId);
+function getTaskIndex(itemId) {
+  return todos.findIndex((todoInArray) => todoInArray.id === itemId);
+};
 
-  if (indexOfTodoToDelete !== -1) {
-    todos.splice(indexOfTodoToDelete, 1);
+let lastDeletedTask = null;
+let lastDeletedTaskIndex = -1;
+
+function deleteTodo(itemId) {
+  lastDeletedTaskIndex = getTaskIndex(itemId);
+
+  if (lastDeletedTaskIndex !== -1) {
+    lastDeletedTask = todos.splice(lastDeletedTaskIndex, 1)[0];
   };
 };
 
+function returnLastDeletedTask() {
+  if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
+    todos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
+  };
+};
 
 function getTaskById(itemId) {
   const task = todos.find((item) => item.id === itemId);
@@ -95,11 +107,10 @@ function getFilteredTasks() {
   };
 };
 
-
-export function validateTitle(title) {
+function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty };
+export { todos, addTodo, deleteTodo, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask };
 
 
