@@ -42,7 +42,7 @@ function addTodo(newTaskTitle) {
   });
 };
 
-function getIndexTask(itemId) {
+function getTaskIndex(itemId) {
   return todos.findIndex((todoInArray) => todoInArray.id === itemId);
 };
 
@@ -50,14 +50,14 @@ let lastDeletedTask = null;
 let lastDeletedTaskIndex = -1;
 
 function deleteTodo(itemId) {
-  lastDeletedTaskIndex = getIndexTask(itemId);
+  lastDeletedTaskIndex = getTaskIndex(itemId);
 
   if (lastDeletedTaskIndex !== -1) {
     lastDeletedTask = todos.splice(lastDeletedTaskIndex, 1)[0];
   };
 };
 
-function returnDeletedTask() {
+function returnLastDeletedTask() {
   if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
     todos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
   };
@@ -111,6 +111,6 @@ function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnDeletedTask };
+export { todos, addTodo, deleteTodo, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask };
 
 

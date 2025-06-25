@@ -16,7 +16,7 @@ export function deleteTask(event) {
 };
 
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
-  model.returnDeletedTask();
+  model.returnLastDeletedTask();
 
   deleteView.showCancelTaskDeleteButton();
 
