@@ -95,15 +95,38 @@ function getFilteredTasks() {
   };
 };
 
+function someComplexFilter(someArray) {
+  return someArray.filter(item => {
+
+
+    return isNotEmpty(item) && isLengthMoreThanThree(item) && filter3(item)
+  })
+}
+
+function isNotEmpty(item) {
+  return item !== ''
+}
+
+function isLengthMoreThanThree(item) {
+  return item.length > 3
+}
+
+function filter3(item) {
+  return true
+}
+
 function validateTitle(title) {
   return title.trim() !== "";
 };
 
-function searchTasks(inputValue) {
+function searchTasks(searchText) {
+  const normalizedSearchText = searchText.toLowerCase();
+
   return todos.filter((task) =>
-    task.title.toLocaleLowerCase().includes(inputValue)
+    task.title.toLocaleLowerCase().includes(normalizedSearchText)
   );
 };
+
 
 export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, searchTasks };
 

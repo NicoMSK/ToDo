@@ -4,6 +4,8 @@ import * as formView from '../form/formView.js';
 import * as filterView from '../filter/filterView.js';
 import debounce from 'lodash.debounce';
 
+const DEBOUNCE_INTERVAL_MS = 300;
+
 function handleSearchTasks() {
   const inputValue = searchView.searchInput.value.toLowerCase().trim();
   const searchTodos = model.searchTasks(inputValue);
@@ -18,4 +20,4 @@ function handleSearchTasks() {
 };
 
 searchView.searchInput.addEventListener("input",
-  debounce(handleSearchTasks, 300));
+  debounce(handleSearchTasks, DEBOUNCE_INTERVAL_MS));
