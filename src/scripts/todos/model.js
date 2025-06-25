@@ -4,23 +4,23 @@ const TODO_EXAMPLE = {
   title: "Купить хлеба"
 }
 
-const todos = [
-  {
-    id: 123,
-    isComplete: false,
-    title: "Купить хлеба"
-  },
-  {
-    id: 124,
-    isComplete: false,
-    title: "Купить "
-  },
-  {
-    id: 125,
-    isComplete: false,
-    title: " хлеба"
-  }
-];
+// const todos = [
+//   {
+//     id: 123,
+//     isComplete: false,
+//     title: "Купить хлеба"
+//   },
+//   {
+//     id: 124,
+//     isComplete: false,
+//     title: "Купить "
+//   },
+//   {
+//     id: 125,
+//     isComplete: false,
+//     title: " хлеба"
+//   }
+// ];
 
 const FILTER = {
   all: "all",
@@ -34,12 +34,25 @@ const FILTER_LABELS = {
   incomplete: "В работе"
 };
 
+const todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+function getElementKeyFromLocalStorage() {
+  const localStorageSize = localStorage.length;
+  console.warn(localStorageSize)
+  for (let i = 0; i < localStorageSize; i++) {
+    localStorage.getItem(localStorage.key(i));
+    console.log(localStorage.key(i))
+  }
+};
+
 function addTodo(newTaskTitle) {
   todos.push({
     id: new Date().getTime(),
     isComplete: false,
     title: newTaskTitle
   });
+
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 function deleteTodo(itemId) {
@@ -47,9 +60,9 @@ function deleteTodo(itemId) {
 
   if (indexOfTodoToDelete !== -1) {
     todos.splice(indexOfTodoToDelete, 1);
+    localStorage.removeItem(getElementKeyFromLocalStorage());
   };
 };
-
 
 function getTaskById(itemId) {
   const task = todos.find((item) => item.id === itemId);
