@@ -6,18 +6,21 @@ import debounce from 'lodash.debounce';
 
 const DEBOUNCE_INTERVAL_MS = 300;
 
-function handleSearchTasks() {
-  const inputValue = searchView.searchInput.value.toLowerCase().trim();
-  const searchTodos = model.searchTasks(inputValue);
+export function clearSearch() {
+  searchView.searchInput.value = "";
+  model.setCurrentSearchText("");
+};
 
-  if (inputValue === "") {
-    formView.renderList(model.getFilteredTasks());
-  } else {
-    model.setCurrentFilterValue(model.FILTER.all);
-    filterView.setValueForFilterSelect(model.getCurrentFilterValue());
-    formView.renderList(searchTodos);
-  };
+function handleSearchTasks() {
+  const inputValue = searchView.searchInput.value;
+  model.setCurrentSearchText(inputValue)
+
+  model.setCurrentFilterValue(model.FILTER.all);
+  filterView.setValueForFilterSelect(model.getCurrentFilterValue());
+
+  formView.renderList(model.getTasks());
 };
 
 searchView.searchInput.addEventListener("input",
   debounce(handleSearchTasks, DEBOUNCE_INTERVAL_MS));
+

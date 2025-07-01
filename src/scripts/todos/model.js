@@ -1,7 +1,7 @@
 const TODO_EXAMPLE = {
   id: 123,
   isComplete: false,
-  title: "Купить хлеба"
+  title: "Купить молокА"
 }
 
 const todos = [
@@ -11,9 +11,19 @@ const todos = [
     title: "Купить хлеба"
   },
   {
+    id: 1233,
+    isComplete: false,
+    title: "Машина"
+  },
+  {
     id: 124,
     isComplete: false,
     title: "Купить "
+  },
+  {
+    id: 12422,
+    isComplete: false,
+    title: "Молоко "
   },
   {
     id: 125,
@@ -42,14 +52,26 @@ function addTodo(newTaskTitle) {
   });
 };
 
-function deleteTodo(itemId) {
-  const indexOfTodoToDelete = todos.findIndex((todoInArray) => todoInArray.id === itemId);
+function getTaskIndex(itemId) {
+  return todos.findIndex((todoInArray) => todoInArray.id === itemId);
+};
 
-  if (indexOfTodoToDelete !== -1) {
-    todos.splice(indexOfTodoToDelete, 1);
+let lastDeletedTask = null;
+let lastDeletedTaskIndex = -1;
+
+function deleteTodo(itemId) {
+  lastDeletedTaskIndex = getTaskIndex(itemId);
+
+  if (lastDeletedTaskIndex !== -1) {
+    lastDeletedTask = todos.splice(lastDeletedTaskIndex, 1)[0];
   };
 };
 
+function returnLastDeletedTask() {
+  if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
+    todos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
+  };
+};
 
 function getTaskById(itemId) {
   const task = todos.find((item) => item.id === itemId);
@@ -82,52 +104,53 @@ function getCurrentFilterValue() {
   return currentFilterValue;
 };
 
-function getFilteredTasks() {
+function getFilteredTasks(task) {
   switch (currentFilterValue) {
     case FILTER.complete:
-      return todos.filter((task) => task.isComplete === true);
+      return task.isComplete === true;
     case FILTER.incomplete:
-      return todos.filter((task) => task.isComplete === false);
+      return task.isComplete === false;
     case FILTER.all:
-      return todos;
+      return true;
     default:
       throw new Error("Получен фильтр, которого нет")
   };
 };
 
-function someComplexFilter(someArray) {
-  return someArray.filter(item => {
+let normalizedSearchText = null;
 
+export function setCurrentSearchText(searchText) {
+  normalizedSearchText = searchText.toLowerCase().trim();
+};
 
-    return isNotEmpty(item) && isLengthMoreThanThree(item) && filter3(item)
-  })
-}
+/// надо обсудить более точно, как это работает, без функции getCurrentSearchText, редактирование работало некоректно
 
-function isNotEmpty(item) {
-  return item !== ''
-}
+export function getCurrentSearchText() {
+  return normalizedSearchText;
+};
 
-function isLengthMoreThanThree(item) {
-  return item.length > 3
-}
+function searchTextTask(item) {
+  return item.title.toLocaleLowerCase().includes(normalizedSearchText);
+};
 
-function filter3(item) {
-  return true
-}
+function isStringNotEmpty() {
+  return typeof normalizedSearchText === "string" && normalizedSearchText.trim() !== "";
+};
+
+export function getTasks() {
+  return todos.filter(task => {
+    const matchesStatus = getFilteredTasks(task);
+    const matchesText = isStringNotEmpty() ? searchTextTask(task) : true;
+
+    return matchesText && matchesStatus;
+  }
+  );
+};
 
 function validateTitle(title) {
   return title.trim() !== "";
 };
 
-function searchTasks(searchText) {
-  const normalizedSearchText = searchText.toLowerCase();
-
-  return todos.filter((task) =>
-    task.title.toLocaleLowerCase().includes(normalizedSearchText)
-  );
-};
-
-
-export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, searchTasks };
+export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask };
 
 

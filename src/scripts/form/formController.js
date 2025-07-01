@@ -1,9 +1,11 @@
 import * as dialogView from "../dialog/dialogView.js";
 import * as formView from "./formView.js";
-import * as model from "../todos/model.js";
 import * as filterView from "../filter/filterView.js";
+import * as model from "../todos/model.js";
+import * as searchController from "../search/searchController.js";
 
-formView.renderList(model.getFilteredTasks());/// DELETE//////
+formView.renderList(model.getTasks());
+
 formView.addsPictureWhenNoTasks(model.todos.length);
 
 formView.dialogForm.addEventListener("submit", (event) => {
@@ -15,8 +17,10 @@ formView.dialogForm.addEventListener("submit", (event) => {
   };
   model.addTodo(newTaskTitle);
 
+  searchController.clearSearch();
+
   model.setCurrentFilterValue(model.FILTER.all);
-  formView.renderList(model.getFilteredTasks());
+  formView.renderList(model.getTasks());
 
   filterView.setValueForFilterSelect(model.getCurrentFilterValue());
 

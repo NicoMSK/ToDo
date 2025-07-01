@@ -1,18 +1,19 @@
 import * as dialogView from "./dialogView.js";
 import * as searchView from "../search/searchView.js";
+import * as searchController from "../search/searchController.js";
 import * as formView from "../form/formView.js";
 import * as model from "../todos/model.js";
 
 function renderFilteredTasksOnDialogClose() {
-  const inputValue = searchView.searchInput.value.toLowerCase().trim();
+  const inputValue = searchView.searchInput.value;
 
   if (inputValue === "") {
-    formView.renderList(model.getFilteredTasks());
+    formView.renderList(model.getTasks());
   };
 };
 
 dialogView.buttonOpenDialog.addEventListener("click", () => {
-  searchView.searchInput.value = "";
+  searchController.clearSearch();
   dialogView.openDialog();
 });
 

@@ -22,7 +22,7 @@ filterView.listSelect.addEventListener('click', (event) => {
 
   filterView.setValueForFilterSelect(filterValue);
 
-  formView.renderList(model.getFilteredTasks());
+  formView.renderList(model.getTasks());
 
   filterView.toggleTaskFilterList();
 });

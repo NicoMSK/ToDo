@@ -2,7 +2,7 @@ import * as deleteView from './deleteView.js';
 import * as model from '../todos/model.js';
 import * as formView from '../form/formView.js';
 import * as taskView from "../task/taskView.js";
-import * as searchView from "../search/searchView.js";
+import * as searchController from "../search/searchController.js";
 
 export function deleteTask(event) {
   const taskId = taskView.getTaskIdFromClickEvent(event);
@@ -10,15 +10,19 @@ export function deleteTask(event) {
 
   model.deleteTodo(Number(taskId));
 
-  const currentValue = model.getCurrentFilterValue();
-
-  formView.renderList(model.getFilteredTasks(currentValue));
+  /// А для чего мы вводили эту переменную и передавали её аргументов в функцию getFilteredTasks? Если без неё всё работает
+  // const currentValueFilter = model.getCurrentFilterValue();
+  searchController.clearSearch();
+  formView.renderList(model.getTasks());
 
   deleteView.startTimerButton();
-  searchView.searchInput.value = '';
 };
 
 deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
+  model.returnLastDeletedTask();
+
   deleteView.showCancelTaskDeleteButton();
+
+  formView.renderList(model.getTasks());
 });
 
