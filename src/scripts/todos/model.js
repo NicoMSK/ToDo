@@ -11,14 +11,24 @@ const todos = [
     title: "Купить хлеба"
   },
   {
+    id: 1233,
+    isComplete: false,
+    title: "Машина"
+  },
+  {
     id: 124,
     isComplete: false,
     title: "Купить "
   },
   {
+    id: 12422,
+    isComplete: false,
+    title: "Молоко "
+  },
+  {
     id: 125,
     isComplete: false,
-    title: " хлеба"
+    title: "хлеба"
   }
 ];
 
@@ -94,23 +104,51 @@ function getCurrentFilterValue() {
   return currentFilterValue;
 };
 
-function getFilteredTasks() {
+function doesTaskMatchFilter(task) {
   switch (currentFilterValue) {
     case FILTER.complete:
-      return todos.filter((task) => task.isComplete === true);
+      return task.isComplete === true;
     case FILTER.incomplete:
-      return todos.filter((task) => task.isComplete === false);
+      return task.isComplete === false;
     case FILTER.all:
-      return todos;
+      return true;
     default:
       throw new Error("Получен фильтр, которого нет")
   };
+};
+
+let currentSearchText = "";
+
+function setCurrentSearchText(searchText) {
+  currentSearchText = searchText.toLowerCase().trim();
+};
+
+function filterTaskByTitle(task) {
+  return task.title.toLocaleLowerCase().includes(currentSearchText);
+};
+
+function isStringNotEmpty() {
+  return currentSearchText.trim() !== "";
+};
+
+function getTasks() {
+  return todos.filter(task => {
+    const isComleteFilterResult = doesTaskMatchFilter(task);
+    let titleFilterResult = true;
+
+    if (isStringNotEmpty()) {
+      titleFilterResult = filterTaskByTitle(task)
+    };
+
+    return titleFilterResult && isComleteFilterResult;
+  }
+  );
 };
 
 function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask };
+export { todos, addTodo, deleteTodo, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
 
 

@@ -1,6 +1,8 @@
 import * as dialogView from "./dialogView.js";
+import * as searchController from "../search/searchController.js";
 
 dialogView.buttonOpenDialog.addEventListener("click", () => {
+  searchController.clearSearch();
   dialogView.openDialog();
 });
 
@@ -19,5 +21,5 @@ dialogView.dialogWindow.addEventListener("keydown", (event) => {
 
   if (keyCode === ESC) {
     dialogView.closeDialog();
-  }
+  };
 });

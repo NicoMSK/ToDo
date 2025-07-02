@@ -19,7 +19,8 @@ function saveAndUpdateTaskTitle({ taskId, newTitle, event }) {
   };
 
   model.updateTaskProperty({ itemId: Number(taskId), property: "title", title: newTitle });
-  formView.renderList(model.getFilteredTasks());
+
+  formView.renderList(model.getTasks());
 };
 
 export function saveEditedTaskText(event) {
@@ -60,5 +61,5 @@ export function toggleTaskCompletion(event) {
 
   model.updateTaskProperty({ itemId: Number(taskId), property: "isComlete" });
 
-  formView.renderList(model.getFilteredTasks());
+  formView.renderList(model.getTasks());
 };
