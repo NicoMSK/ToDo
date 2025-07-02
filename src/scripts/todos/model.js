@@ -119,14 +119,8 @@ function doesTaskMatchFilter(task) {
 
 let currentSearchText = "";
 
-export function setCurrentSearchText(searchText) {
+function setCurrentSearchText(searchText) {
   currentSearchText = searchText.toLowerCase().trim();
-};
-
-/// надо обсудить более точно, как это работает, без функции getCurrentSearchText, редактирование работало некоректно
-
-export function getCurrentSearchText() {
-  return currentSearchText;
 };
 
 function filterTaskByTitle(task) {
@@ -137,7 +131,7 @@ function isStringNotEmpty() {
   return currentSearchText.trim() !== "";
 };
 
-export function getTasks() {
+function getTasks() {
   return todos.filter(task => {
     const isComleteFilterResult = doesTaskMatchFilter(task);
     let titleFilterResult = true;
@@ -155,6 +149,6 @@ function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getTaskById, doesTaskMatchFilter as getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask };
+export { todos, addTodo, deleteTodo, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
 
 

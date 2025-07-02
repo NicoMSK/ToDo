@@ -9,11 +9,13 @@ const DEBOUNCE_INTERVAL_MS = 300;
 export function clearSearch() {
   searchView.searchInput.value = "";
   model.setCurrentSearchText("");
+
+  formView.renderList(model.getTasks());
 };
 
 function handleSearchTasks() {
   const inputValue = searchView.searchInput.value;
-  model.setCurrentSearchText(inputValue)
+  model.setCurrentSearchText(inputValue);
 
   model.setCurrentFilterValue(model.FILTER.all);
   filterView.setValueForFilterSelect(model.getCurrentFilterValue());

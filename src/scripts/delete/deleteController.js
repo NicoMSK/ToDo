@@ -10,8 +10,6 @@ export function deleteTask(event) {
 
   model.deleteTodo(Number(taskId));
 
-  /// А для чего мы вводили эту переменную и передавали её аргументов в функцию getFilteredTasks? Если без неё всё работает
-  // const currentValueFilter = model.getCurrentFilterValue();
   searchController.clearSearch();
   formView.renderList(model.getTasks());
 

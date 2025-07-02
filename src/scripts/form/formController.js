@@ -2,7 +2,6 @@ import * as dialogView from "../dialog/dialogView.js";
 import * as formView from "./formView.js";
 import * as filterView from "../filter/filterView.js";
 import * as model from "../todos/model.js";
-import * as searchController from "../search/searchController.js";
 
 formView.renderList(model.getTasks());
 
@@ -16,8 +15,6 @@ formView.dialogForm.addEventListener("submit", (event) => {
     return
   };
   model.addTodo(newTaskTitle);
-
-  searchController.clearSearch();
 
   model.setCurrentFilterValue(model.FILTER.all);
   formView.renderList(model.getTasks());
