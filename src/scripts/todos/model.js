@@ -104,7 +104,7 @@ function getCurrentFilterValue() {
   return currentFilterValue;
 };
 
-function getFilteredTasks(task) {
+function doesTaskMatchFilter(task) {
   switch (currentFilterValue) {
     case FILTER.complete:
       return task.isComplete === true;
@@ -117,32 +117,36 @@ function getFilteredTasks(task) {
   };
 };
 
-let normalizedSearchText = null;
+let currentSearchText = "";
 
 export function setCurrentSearchText(searchText) {
-  normalizedSearchText = searchText.toLowerCase().trim();
+  currentSearchText = searchText.toLowerCase().trim();
 };
 
 /// надо обсудить более точно, как это работает, без функции getCurrentSearchText, редактирование работало некоректно
 
 export function getCurrentSearchText() {
-  return normalizedSearchText;
+  return currentSearchText;
 };
 
-function searchTextTask(item) {
-  return item.title.toLocaleLowerCase().includes(normalizedSearchText);
+function filterTaskByTitle(task) {
+  return task.title.toLocaleLowerCase().includes(currentSearchText);
 };
 
 function isStringNotEmpty() {
-  return typeof normalizedSearchText === "string" && normalizedSearchText.trim() !== "";
+  return currentSearchText.trim() !== "";
 };
 
 export function getTasks() {
   return todos.filter(task => {
-    const matchesStatus = getFilteredTasks(task);
-    const matchesText = isStringNotEmpty() ? searchTextTask(task) : true;
+    const isComleteFilterResult = doesTaskMatchFilter(task);
+    let titleFilterResult = true;
 
-    return matchesText && matchesStatus;
+    if (isStringNotEmpty()) {
+      titleFilterResult = filterTaskByTitle(task)
+    };
+
+    return titleFilterResult && isComleteFilterResult;
   }
   );
 };
@@ -151,6 +155,6 @@ function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask };
+export { todos, addTodo, deleteTodo, getTaskById, doesTaskMatchFilter as getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask };
 
 
