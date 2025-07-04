@@ -7,20 +7,27 @@ export function editHandler(event) {
   editView.switchTodoItemToEditMode(event);
 };
 
-function saveAndUpdateTaskTitle(taskId, newTitle) {
-  if (!taskId || newTitle === null) {
+function saveAndUpdateTaskTitle({ taskId, newTitle, event }) {
+  if (!taskId) {
+    return;
+  };
+
+  const validateNewTitile = model.validateTitle(newTitle);
+  if (!validateNewTitile) {
+    editView.showEditValidationError(event);
     return;
   };
 
   model.updateTaskProperty({ itemId: Number(taskId), property: "title", title: newTitle });
-  formView.renderList(model.getFilteredTasks());
+
+  formView.renderList(model.getTasks());
 };
 
 export function saveEditedTaskText(event) {
   const taskId = taskView.getTaskIdFromClickEvent(event);
   const newTitle = editView.handleEditEvent({ event });
 
-  saveAndUpdateTaskTitle(taskId, newTitle);
+  saveAndUpdateTaskTitle({ taskId, newTitle, event });
 };
 
 export function cancelEditTask(event) {
@@ -42,7 +49,7 @@ export function handleEditKeyDown(event) {
     const taskId = taskView.getTaskIdFromClickEvent(event);
     const newTitle = editView.handleEditEvent({ event });
 
-    saveAndUpdateTaskTitle(taskId, newTitle);
+    saveAndUpdateTaskTitle({ taskId, newTitle, event });
   };
 };
 
@@ -54,5 +61,5 @@ export function toggleTaskCompletion(event) {
 
   model.updateTaskProperty({ itemId: Number(taskId), property: "isComlete" });
 
-  formView.renderList(model.getFilteredTasks());
+  formView.renderList(model.getTasks());
 };

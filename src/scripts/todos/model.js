@@ -1,7 +1,9 @@
+import * as LocalStorage from '../utils/localStorage.js';
+
 const TODO_EXAMPLE = {
   id: 123,
   isComplete: false,
-  title: "Купить хлеба"
+  title: "Купить молокА"
 }
 
 // const todos = [
@@ -11,14 +13,24 @@ const TODO_EXAMPLE = {
 //     title: "Купить хлеба"
 //   },
 //   {
+//     id: 1233,
+//     isComplete: false,
+//     title: "Машина"
+//   },
+//   {
 //     id: 124,
 //     isComplete: false,
 //     title: "Купить "
 //   },
 //   {
+//     id: 12422,
+//     isComplete: false,
+//     title: "Молоко "
+//   },
+//   {
 //     id: 125,
 //     isComplete: false,
-//     title: " хлеба"
+//     title: "хлеба"
 //   }
 // ];
 
@@ -34,16 +46,7 @@ const FILTER_LABELS = {
   incomplete: "В работе"
 };
 
-const todos = JSON.parse(localStorage.getItem("todos")) || [];
-
-function getElementKeyFromLocalStorage() {
-  const localStorageSize = localStorage.length;
-  console.warn(localStorageSize)
-  for (let i = 0; i < localStorageSize; i++) {
-    localStorage.getItem(localStorage.key(i));
-    console.log(localStorage.key(i))
-  }
-};
+const todos = LocalStorage.todosLocalStorageService.getLocalStorage();
 
 function addTodo(newTaskTitle) {
   todos.push({
@@ -52,15 +55,29 @@ function addTodo(newTaskTitle) {
     title: newTaskTitle
   });
 
-  localStorage.setItem("todos", JSON.stringify(todos));
+  LocalStorage.todosLocalStorageService.setLocalStorage(todos);
 };
 
-function deleteTodo(itemId) {
-  const indexOfTodoToDelete = todos.findIndex((todoInArray) => todoInArray.id === itemId);
+function getTaskIndex(itemId) {
+  return todos.findIndex((todoInArray) => todoInArray.id === itemId);
+};
 
-  if (indexOfTodoToDelete !== -1) {
-    todos.splice(indexOfTodoToDelete, 1);
-    localStorage.removeItem(getElementKeyFromLocalStorage());
+let lastDeletedTask = null;
+let lastDeletedTaskIndex = -1;
+
+function deleteTodo(itemId) {
+  lastDeletedTaskIndex = getTaskIndex(itemId);
+
+  if (lastDeletedTaskIndex !== -1) {
+    lastDeletedTask = todos.splice(lastDeletedTaskIndex, 1)[0];
+    LocalStorage.todosLocalStorageService.setLocalStorage(todos);
+  };
+};
+
+function returnLastDeletedTask() {
+  if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
+    todos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
+    LocalStorage.todosLocalStorageService.setLocalStorage(todos);
   };
 };
 
@@ -81,13 +98,17 @@ function updateTaskProperty({ itemId, property, title }) {
       task.title = title;
       break;
   };
+
+  LocalStorage.todosLocalStorageService.setLocalStorage(todos);
 };
 
-let currentFilterValue = FILTER.all;
+export let currentFilterValue = LocalStorage.filterLocalStorageService.getLocalStorage();
 
 function setCurrentFilterValue(value) {
   if (value in FILTER) {
     currentFilterValue = value;
+
+    LocalStorage.filterLocalStorageService.setLocalStorage(currentFilterValue);
   };
 };
 
@@ -95,24 +116,51 @@ function getCurrentFilterValue() {
   return currentFilterValue;
 };
 
-function getFilteredTasks() {
+function doesTaskMatchFilter(task) {
   switch (currentFilterValue) {
     case FILTER.complete:
-      return todos.filter((task) => task.isComplete === true);
+      return task.isComplete === true;
     case FILTER.incomplete:
-      return todos.filter((task) => task.isComplete === false);
+      return task.isComplete === false;
     case FILTER.all:
-      return todos;
+      return true;
     default:
       throw new Error("Получен фильтр, которого нет")
   };
 };
 
+let currentSearchText = "";
 
-export function validateTitle(title) {
+function setCurrentSearchText(searchText) {
+  currentSearchText = searchText.toLowerCase().trim();
+};
+
+function filterTaskByTitle(task) {
+  return task.title.toLocaleLowerCase().includes(currentSearchText);
+};
+
+function isStringNotEmpty() {
+  return currentSearchText.trim() !== "";
+};
+
+function getTasks() {
+  return todos.filter(task => {
+    const isComleteFilterResult = doesTaskMatchFilter(task);
+    let titleFilterResult = true;
+
+    if (isStringNotEmpty()) {
+      titleFilterResult = filterTaskByTitle(task)
+    };
+
+    return titleFilterResult && isComleteFilterResult;
+  }
+  );
+};
+
+function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getTaskById, getFilteredTasks, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty };
+export { todos, addTodo, deleteTodo, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
 
 

@@ -4,7 +4,7 @@ import * as formView from "../form/formView.js";
 
 filterView.createCustomSelectList(model.FILTER, model.FILTER_LABELS);
 
-filterView.setValueForFilterSelect(model.FILTER.all);
+filterView.setValueForFilterSelect(model.currentFilterValue);
 
 filterView.buttonSelect.addEventListener('click', () => {
   filterView.toggleTaskFilterList();
@@ -22,7 +22,7 @@ filterView.listSelect.addEventListener('click', (event) => {
 
   filterView.setValueForFilterSelect(filterValue);
 
-  formView.renderList(model.getFilteredTasks());
+  formView.renderList(model.getTasks());
 
   filterView.toggleTaskFilterList();
 });
