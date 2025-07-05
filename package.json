@@ -6,7 +6,8 @@
     "start": "webpack serve --open --mode development",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "icons": "svg-sprite-generate -d src/images/icons -o src/icons/sprite.svg"
+    "icons": "svg-sprite-generate -d src/images/icons -o src/icons/sprite.svg",
+    "start-backend": "npx json-server db.json"
   },
   "keywords": [],
   "author": "",
@@ -42,6 +43,7 @@
     "webpack-dev-server": "^5.2.1"
   },
   "dependencies": {
+    "json-server": "^1.0.0-beta.3",
     "normalize.css": "^8.0.1"
   }
 }
