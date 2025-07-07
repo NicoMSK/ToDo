@@ -1,0 +1,14 @@
+{
+    "todos": [
+        {
+            "id": 123,
+            "isComplete": false,
+            "title": "Купить хлеба"
+        },
+        {
+            "id": 1233,
+            "isComplete": false,
+            "title": "Машина"
+        }
+    ]
+}
