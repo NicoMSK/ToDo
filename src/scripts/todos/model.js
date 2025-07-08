@@ -1,39 +1,5 @@
 import * as LocalStorage from '../utils/localStorage.js';
 
-const TODO_EXAMPLE = {
-  id: 123,
-  isComplete: false,
-  title: "Купить молокА"
-}
-
-// const todos = [
-//   {
-//     id: 123,
-//     isComplete: false,
-//     title: "Купить хлеба"
-//   },
-//   {
-//     id: 1233,
-//     isComplete: false,
-//     title: "Машина"
-//   },
-//   {
-//     id: 124,
-//     isComplete: false,
-//     title: "Купить "
-//   },
-//   {
-//     id: 12422,
-//     isComplete: false,
-//     title: "Молоко "
-//   },
-//   {
-//     id: 125,
-//     isComplete: false,
-//     title: "хлеба"
-//   }
-// ];
-
 const FILTER = {
   all: "all",
   complete: "complete",

@@ -1,8 +1,11 @@
 import * as themeView from './themeView.js';
+import * as themeModel from '../todos/themeModel.js';
 
-themeView.applySavedTheme();
+themeView.applySavedTheme(themeModel.currentTheme);
 
 themeView.themeButton.addEventListener('click', () => {
-  themeView.switchTheme();
+  const themeValue = themeView.switchTheme();
+
+  themeModel.setCurrentThemeValue(themeValue);
 });
 
