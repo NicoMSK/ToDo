@@ -7,16 +7,11 @@ export function applySavedTheme(currentTheme) {
   };
 };
 
-export function switchTheme() {
-  let theme = "light";
-  bodyTheme.classList.toggle("dark__theme");
-
-  const isThereClassOnBody = bodyTheme.classList.contains("dark__theme");
-
-  if (isThereClassOnBody) {
-    theme = "dark";
+export function switchTheme(themeValue) {
+  if (themeValue === "dark") {
+    bodyTheme.classList.add("dark__theme");
+  } else {
+    bodyTheme.classList.remove("dark__theme");
   };
-
-  return theme;
 };
 
