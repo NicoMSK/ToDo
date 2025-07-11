@@ -1,12 +1,15 @@
 import * as LocalStorage from '../utils/localStorage.js';
 
+const DARK = "dark";
+const LIGHT = "light";
+
 export let currentTheme = LocalStorage.themeLocalStorageService.getLocalStorage();
 
 export function toggleTheme() {
-  if (currentTheme === null || currentTheme.trim().toLowerCase() === "dark") {
-    currentTheme = "light";
+  if (currentTheme === null || currentTheme === DARK) {
+    currentTheme = LIGHT;
   } else {
-    currentTheme = "dark";
+    currentTheme = DARK;
   };
 
   LocalStorage.themeLocalStorageService.setLocalStorage(currentTheme);

@@ -2,7 +2,7 @@ const bodyTheme = document.querySelector('.page__body');
 export const themeButton = document.querySelector('.nav__theme-btn');
 
 export function applySavedTheme(currentTheme) {
-  if (currentTheme && currentTheme.toLowerCase() === "dark") {
+  if (currentTheme && currentTheme === "dark") {
     bodyTheme.classList.add("dark__theme");
   };
 };
