@@ -1,36 +1,4 @@
-const TODO_EXAMPLE = {
-  id: 123,
-  isComplete: false,
-  title: "Купить молокА"
-}
-
-const todos = [
-  {
-    id: 123,
-    isComplete: false,
-    title: "Купить хлеба"
-  },
-  {
-    id: 1233,
-    isComplete: false,
-    title: "Машина"
-  },
-  {
-    id: 124,
-    isComplete: false,
-    title: "Купить "
-  },
-  {
-    id: 12422,
-    isComplete: false,
-    title: "Молоко "
-  },
-  {
-    id: 125,
-    isComplete: false,
-    title: "хлеба"
-  }
-];
+import * as LocalStorage from '../utils/localStorage.js';
 
 const FILTER = {
   all: "all",
@@ -44,12 +12,16 @@ const FILTER_LABELS = {
   incomplete: "В работе"
 };
 
+const todos = LocalStorage.todosLocalStorageService.getLocalStorage();
+
 function addTodo(newTaskTitle) {
   todos.push({
     id: new Date().getTime(),
     isComplete: false,
     title: newTaskTitle
   });
+
+  LocalStorage.todosLocalStorageService.setLocalStorage(todos);
 };
 
 function getTaskIndex(itemId) {
@@ -64,12 +36,14 @@ function deleteTodo(itemId) {
 
   if (lastDeletedTaskIndex !== -1) {
     lastDeletedTask = todos.splice(lastDeletedTaskIndex, 1)[0];
+    LocalStorage.todosLocalStorageService.setLocalStorage(todos);
   };
 };
 
 function returnLastDeletedTask() {
   if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
     todos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
+    LocalStorage.todosLocalStorageService.setLocalStorage(todos);
   };
 };
 
@@ -90,13 +64,17 @@ function updateTaskProperty({ itemId, property, title }) {
       task.title = title;
       break;
   };
+
+  LocalStorage.todosLocalStorageService.setLocalStorage(todos);
 };
 
-let currentFilterValue = FILTER.all;
+export let currentFilterValue = LocalStorage.filterLocalStorageService.getLocalStorage();
 
 function setCurrentFilterValue(value) {
   if (value in FILTER) {
     currentFilterValue = value;
+
+    LocalStorage.filterLocalStorageService.setLocalStorage(currentFilterValue);
   };
 };
 

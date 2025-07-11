@@ -4,7 +4,15 @@ import * as formView from "../form/formView.js";
 
 filterView.createCustomSelectList(model.FILTER, model.FILTER_LABELS);
 
-filterView.setValueForFilterSelect(model.FILTER.all);
+function setsCurrentFilterValue() {
+  if (model.currentFilterValue === null) {
+    filterView.setValueForFilterSelect(model.FILTER.all);
+  } else {
+    filterView.setValueForFilterSelect(model.currentFilterValue);
+  };
+};
+
+setsCurrentFilterValue();
 
 filterView.buttonSelect.addEventListener('click', () => {
   filterView.toggleTaskFilterList();
