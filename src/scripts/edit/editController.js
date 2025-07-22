@@ -18,7 +18,8 @@ function saveAndUpdateTaskTitle({ taskId, newTitle, event }) {
     return;
   };
 
-  model.updateTaskProperty({ itemId: Number(taskId), property: "title", title: newTitle });
+  // model.updateTaskProperty({ itemId: Number(taskId), property: "title", title: newTitle });
+  model.updateTaskProperty({ itemId: taskId, property: "title", title: newTitle });
 
   formView.renderList(model.getTasks());
 };
@@ -59,7 +60,7 @@ export function toggleTaskCompletion(event) {
     return;
   };
 
-  model.updateTaskProperty({ itemId: Number(taskId), property: "isComlete" });
+  model.updateTaskProperty({ itemId: taskId, property: "isComlete" });
 
   formView.renderList(model.getTasks());
 };

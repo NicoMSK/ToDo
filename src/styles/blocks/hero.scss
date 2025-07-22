@@ -20,6 +20,15 @@
   }
 }
 
+.hero__loading {
+  margin: 0 auto;
+  font-size: 25px;
+
+  &--hidden {
+    @include visually-hidden;
+  }
+}
+
 .hero__item {
   padding: 20px 0;
   display: flex;
@@ -76,7 +85,6 @@
     }
   }
 }
-
 
 .hero__input-error {
   display: block;

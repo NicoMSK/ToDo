@@ -30,7 +30,7 @@ export function addsPictureWhenNoTasks(tasksAmount) {
 export function renderList(tasksArray) {
   heroList.innerHTML = "";
 
-  addsPictureWhenNoTasks(tasksArray.length); /// можно оптимизировать, чтоб не делать лишние ремувы
+  addsPictureWhenNoTasks(tasksArray.length);
 
   for (let i = 0; i < tasksArray.length; i++) {
     const newTaskItem = itemTemplate.cloneNode(true);

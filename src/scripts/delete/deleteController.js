@@ -4,11 +4,11 @@ import * as formView from '../form/formView.js';
 import * as taskView from "../task/taskView.js";
 import * as searchController from "../search/searchController.js";
 
-export function deleteTask(event) {
+export async function deleteTask(event) {
   const taskId = taskView.getTaskIdFromClickEvent(event);
   if (!taskId) return;
 
-  model.deleteTodo(Number(taskId));
+  await model.deleteTask(taskId);
 
   searchController.clearSearch();
   formView.renderList(model.getTasks());
@@ -16,11 +16,10 @@ export function deleteTask(event) {
   deleteView.startTimerButton();
 };
 
-deleteView.cancelTaskDeletionButton.addEventListener('click', () => {
-  model.returnLastDeletedTask();
-
-  deleteView.showCancelTaskDeleteButton();
+deleteView.cancelTaskDeletionButton.addEventListener('click', async () => {
+  await model.returnLastDeletedTask();
 
   formView.renderList(model.getTasks());
+  deleteView.showCancelTaskDeleteButton();
 });
 

@@ -1,4 +1,5 @@
 import * as LocalStorage from '../utils/localStorage.js';
+import * as api from '../api/todosApi.js';
 
 const FILTER = {
   all: "all",
@@ -12,43 +13,48 @@ const FILTER_LABELS = {
   incomplete: "В работе"
 };
 
-const todos = LocalStorage.todosLocalStorageService.getLocalStorage();
+let serverTodos = [];
 
-function addTodo(newTaskTitle) {
-  todos.push({
-    id: new Date().getTime(),
+async function getTasksFromServer() {
+  serverTodos = await api.getTodos();
+};
+
+async function addTodo(newTaskTitle) {
+  const newTask = {
     isComplete: false,
     title: newTaskTitle
-  });
+  };
 
-  LocalStorage.todosLocalStorageService.setLocalStorage(todos);
+  const taskServer = await api.createNewTodo(newTask);
+  serverTodos.push(taskServer);
 };
 
 function getTaskIndex(itemId) {
-  return todos.findIndex((todoInArray) => todoInArray.id === itemId);
+  return serverTodos.findIndex((todoInArray) => todoInArray.id === itemId);
 };
 
 let lastDeletedTask = null;
 let lastDeletedTaskIndex = -1;
 
-function deleteTodo(itemId) {
+async function deleteTask(itemId) {
   lastDeletedTaskIndex = getTaskIndex(itemId);
 
   if (lastDeletedTaskIndex !== -1) {
-    lastDeletedTask = todos.splice(lastDeletedTaskIndex, 1)[0];
-    LocalStorage.todosLocalStorageService.setLocalStorage(todos);
+    lastDeletedTask = serverTodos[lastDeletedTaskIndex];
+    await api.deleteTodo(String(itemId));
+    serverTodos.splice(lastDeletedTaskIndex, 1);
   };
 };
 
-function returnLastDeletedTask() {
+async function returnLastDeletedTask() {
   if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
-    todos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
-    LocalStorage.todosLocalStorageService.setLocalStorage(todos);
+    await api.createNewTodo(lastDeletedTask);
+    serverTodos.push(lastDeletedTask);
   };
 };
 
 function getTaskById(itemId) {
-  const task = todos.find((item) => item.id === itemId);
+  const task = serverTodos.find((item) => item.id === itemId);
 
   return task
 };
@@ -65,7 +71,7 @@ function updateTaskProperty({ itemId, property, title }) {
       break;
   };
 
-  LocalStorage.todosLocalStorageService.setLocalStorage(todos);
+  api.editTodo(String(itemId), task)
 };
 
 export let currentFilterValue = LocalStorage.filterLocalStorageService.getLocalStorage();
@@ -110,7 +116,7 @@ function isStringNotEmpty() {
 };
 
 function getTasks() {
-  return todos.filter(task => {
+  return serverTodos.filter(task => {
     const isComleteFilterResult = doesTaskMatchFilter(task);
     let titleFilterResult = true;
 
@@ -127,6 +133,6 @@ function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { todos, addTodo, deleteTodo, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
+export { serverTodos, getTasksFromServer, addTodo, deleteTask, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
 
 
