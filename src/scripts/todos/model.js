@@ -25,8 +25,8 @@ async function addTodo(newTaskTitle) {
     title: newTaskTitle
   };
 
-  const taskServer = await api.createNewTodo(newTask);
-  serverTodos.push(taskServer);
+  const serverTask = await api.createNewTodo(newTask);
+  serverTodos.push(serverTask);
 };
 
 function getTaskIndex(itemId) {
@@ -35,31 +35,53 @@ function getTaskIndex(itemId) {
 
 let lastDeletedTask = null;
 let lastDeletedTaskIndex = -1;
+let deleteTimeoutId = null;
+let arrayOfDeletionTasks = [];
+
+function stopTimer() {
+  if (deleteTimeoutId) {
+    clearTimeout(deleteTimeoutId);
+    deleteTimeoutId = null;
+  };
+};
+
+function deleteTimeoutTask(promis, itemId, lastIndex) {
+  return setTimeout(async () => {
+    if (lastIndex !== -1) {
+      await promis();
+      arrayOfDeletionTasks = arrayOfDeletionTasks.filter(obj => obj.task.id !== itemId);
+    };
+  }, 5000);
+};
 
 async function deleteTask(itemId) {
   lastDeletedTaskIndex = getTaskIndex(itemId);
+  lastDeletedTask = serverTodos.splice(lastDeletedTaskIndex, 1)[0];
 
-  if (lastDeletedTaskIndex !== -1) {
-    lastDeletedTask = serverTodos[lastDeletedTaskIndex];
-    await api.deleteTodo(String(itemId));
-    serverTodos.splice(lastDeletedTaskIndex, 1);
-  };
+  deleteTimeoutId = deleteTimeoutTask(
+    () => api.deleteTodo(String(itemId)),
+    itemId,
+    lastDeletedTaskIndex);
+
+  arrayOfDeletionTasks.push({ task: lastDeletedTask, deleteTimeoutId });
 };
 
 async function returnLastDeletedTask() {
   if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
-    await api.createNewTodo(lastDeletedTask);
-    serverTodos.push(lastDeletedTask);
+    stopTimer()
+    serverTodos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
   };
 };
 
-function getTaskById(itemId) {
-  const task = serverTodos.find((item) => item.id === itemId);
-
-  return task
+function isEmptyTodos() {
+  return serverTodos.length === 0
 };
 
-function updateTaskProperty({ itemId, property, title }) {
+function getTaskById(itemId) {
+  return serverTodos.find((item) => item.id === itemId);
+};
+
+async function updateTaskProperty({ itemId, property, title }) {
   const task = getTaskById(itemId);
 
   switch (property) {
@@ -71,10 +93,10 @@ function updateTaskProperty({ itemId, property, title }) {
       break;
   };
 
-  api.editTodo(String(itemId), task)
+  await api.editTodo(String(itemId), task)
 };
 
-export let currentFilterValue = LocalStorage.filterLocalStorageService.getLocalStorage();
+let currentFilterValue = LocalStorage.filterLocalStorageService.getLocalStorage();
 
 function setCurrentFilterValue(value) {
   if (value in FILTER) {
@@ -133,6 +155,6 @@ function validateTitle(title) {
   return title.trim() !== "";
 };
 
-export { serverTodos, getTasksFromServer, addTodo, deleteTask, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
+export { isEmptyTodos, getTasksFromServer, addTodo, deleteTask, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, currentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
 
 

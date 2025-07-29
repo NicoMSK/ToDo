@@ -9,26 +9,3 @@ import "./scripts/filter/filterController.js";
 import "./scripts/list/listController.js";
 import "./scripts/search/searchController.js";
 import "./scripts/api/todosApi.js"
-
-
-// function jsonServerRequestExpamle() {
-//   async function fetchFunc(path) {
-//     try {
-//       const response = await fetch(path);
-//       if (response.ok) {
-//         const result = await response.json();
-//         console.log('инфа из индекса >>', { result });
-//       }
-//     } catch (e) {
-//       console.error(e);
-//     }
-//   }
-
-//   fetchFunc("http://localhost:3000/todos");
-
-//   // console.log("JsonServerRequestExpamle");
-// }
-
-// jsonServerRequestExpamle();
-
-

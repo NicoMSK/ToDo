@@ -28,7 +28,11 @@
     @include visually-hidden;
   }
 }
-
+.hero__list {
+  &--hidden {
+    @include visually-hidden;
+  }
+}
 .hero__item {
   padding: 20px 0;
   display: flex;

@@ -4,16 +4,12 @@ import * as filterView from "../filter/filterView.js";
 import * as model from "../todos/model.js";
 import * as renderLoading from "../loading/loadingView.js";
 
-renderLoading.showRenderLoading();
-
 async function initForm() {
-  await model.getTasksFromServer();
+  await renderLoading.loadWithLoader(model.getTasksFromServer())
 
   formView.renderList(model.getTasks());
 
-  formView.addsPictureWhenNoTasks(model.serverTodos.length);
-
-  renderLoading.hideRenderLoading();
+  formView.addsPictureWhenNoTasks(model.isEmptyTodos());
 };
 
 initForm();
@@ -25,15 +21,15 @@ formView.dialogForm.addEventListener("submit", async (event) => {
   if (newTaskTitle === null) {
     return
   };
-  await model.addTodo(newTaskTitle);
 
   model.setCurrentFilterValue(model.FILTER.all);
-  formView.renderList(model.getTasks());
-
-
   filterView.setValueForFilterSelect(model.getCurrentFilterValue());
 
   dialogView.closeDialog();
+
+  await renderLoading.loadWithLoader(model.addTodo(newTaskTitle))
+
+  formView.renderList(model.getTasks());
 });
 
 formView.inputDialog.addEventListener("input", () => {

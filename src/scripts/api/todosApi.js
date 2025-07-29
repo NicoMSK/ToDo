@@ -1,67 +1,48 @@
 const API_HOST = "http://localhost:3000";
 
-const todo = {
-  title: "car 5555",
-  isComplete: false
-}
+async function request({ url, objectValues, errorAction, shouldReturn = false }) {
+  try {
+    const response = await fetch(url, objectValues);
+    if (!response.ok) {
+      console.warn(`ошибка при ${errorAction} TODO`);
+      if (shouldReturn) return [];
+    };
+    if (shouldReturn) {
+      return await response.json();
+    };
+  } catch (error) {
+    console.error(error);
+    if (shouldReturn) return [];
+  };
+};
 
 export async function getTodos() {
-  let result = [];
-
-  try {
-    const response = await fetch(`${API_HOST}/todos`);
-    if (response.ok) {
-      result = await response.json();
-    }
-  } catch (error) {
-    console.error(error)
-  };
-
-  return result;
+  return await request({ url: `${API_HOST}/todos`, errorAction: "получении списка", shouldReturn: true });
 };
 
 export async function createNewTodo(newTodo) {
-  try {
-    const response = await fetch(`${API_HOST}/todos`, {
+  return await request({
+    url: `${API_HOST}/todos`, objectValues: {
       method: "POST",
       body: JSON.stringify(newTodo)
-    });
-    if (!response.ok) {
-      console.warn("ошибка при создании нового TODO")
-    };
-
-    const createdTodo = await response.json();
-    return createdTodo;
-
-  } catch (error) {
-    console.error(error);
-  }
+    }, errorAction: "создании нового", shouldReturn: true
+  });
 };
 
 export async function deleteTodo(idTodo) {
-  try {
-    const response = await fetch(`${API_HOST}/todos/${idTodo}`, {
+  await request({
+    url: `${API_HOST}/todos/${idTodo}`, objectValues: {
       method: "DELETE"
-    });
-    if (!response.ok) {
-      console.warn("ошибка при удалении TODO")
-    }
-  } catch (error) {
-    console.error(error);
-  }
+    }, errorAction: "удалении"
+  });
 };
 
 export async function editTodo(idTodo, editTodo) {
-  try {
-    const response = await fetch(`${API_HOST}/todos/${idTodo}`, {
-      method: "PUT",
+  await request({
+    url: `${API_HOST}/todos/${idTodo}`, objectValues: {
+      method: 'PUT',
       body: JSON.stringify(editTodo)
-    });
-    if (!response.ok) {
-      console.warn("ошибка при редактировании TODO")
-    }
-  } catch (error) {
-    console.error(error);
-  }
+    }, errorAction: "редактировании"
+  });
 };
 
