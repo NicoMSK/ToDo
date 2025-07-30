@@ -36,7 +36,6 @@ function getTaskIndex(itemId) {
 let lastDeletedTask = null;
 let lastDeletedTaskIndex = -1;
 let deleteTimeoutId = null;
-let arrayOfDeletionTasks = [];
 
 function stopTimer() {
   if (deleteTimeoutId) {
@@ -45,25 +44,21 @@ function stopTimer() {
   };
 };
 
-function deleteTimeoutTask(promis, itemId, lastIndex) {
+function deleteTaskByTimer(promise) {
   return setTimeout(async () => {
-    if (lastIndex !== -1) {
-      await promis();
-      arrayOfDeletionTasks = arrayOfDeletionTasks.filter(obj => obj.task.id !== itemId);
-    };
+    await promise();
   }, 5000);
 };
 
 async function deleteTask(itemId) {
   lastDeletedTaskIndex = getTaskIndex(itemId);
+
+  if (lastDeletedTaskIndex === -1) return;
+
   lastDeletedTask = serverTodos.splice(lastDeletedTaskIndex, 1)[0];
 
-  deleteTimeoutId = deleteTimeoutTask(
-    () => api.deleteTodo(String(itemId)),
-    itemId,
-    lastDeletedTaskIndex);
-
-  arrayOfDeletionTasks.push({ task: lastDeletedTask, deleteTimeoutId });
+  deleteTimeoutId = deleteTaskByTimer(
+    () => api.deleteTodo(String(itemId)));
 };
 
 async function returnLastDeletedTask() {

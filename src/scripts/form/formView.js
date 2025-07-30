@@ -19,8 +19,8 @@ export function getNewTaskTitle() {
   return taskTextInput;
 };
 
-export function addsPictureWhenNoTasks(tasksAmount) {
-  if (tasksAmount) {
+export function addsPictureWhenNoTasks(hasTasks) {
+  if (hasTasks) {
     heroImg.classList.remove('hero__img-wrapper--hidden');
   } else {
     heroImg.classList.add('hero__img-wrapper--hidden');
