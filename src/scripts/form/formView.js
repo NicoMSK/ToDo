@@ -19,8 +19,8 @@ export function getNewTaskTitle() {
   return taskTextInput;
 };
 
-export function addsPictureWhenNoTasks(tasksAmount) {
-  if (tasksAmount === 0) {
+export function addsPictureWhenNoTasks(hasTasks) {
+  if (hasTasks) {
     heroImg.classList.remove('hero__img-wrapper--hidden');
   } else {
     heroImg.classList.add('hero__img-wrapper--hidden');
@@ -30,7 +30,7 @@ export function addsPictureWhenNoTasks(tasksAmount) {
 export function renderList(tasksArray) {
   heroList.innerHTML = "";
 
-  addsPictureWhenNoTasks(tasksArray.length); /// можно оптимизировать, чтоб не делать лишние ремувы
+  addsPictureWhenNoTasks(tasksArray.length === 0);
 
   for (let i = 0; i < tasksArray.length; i++) {
     const newTaskItem = itemTemplate.cloneNode(true);

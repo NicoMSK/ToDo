@@ -79,8 +79,8 @@ module.exports = {
           to: path.resolve(__dirname, 'dist/images')
         },
         {
-          from: path.resolve(__dirname, 'src/icons'), /// sprite.svg
-          to: path.resolve(__dirname, 'dist/icons'),
+          from: path.resolve(__dirname, 'src', 'icons'), /// sprite.svg
+          to: path.resolve(__dirname, 'dist', 'icons'),
         }
       ]
     }),

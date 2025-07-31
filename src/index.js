@@ -8,24 +8,4 @@ import "./scripts/theme/themeController.js";
 import "./scripts/filter/filterController.js";
 import "./scripts/list/listController.js";
 import "./scripts/search/searchController.js";
-
-async function jsonServerRequestExpamle() {
-  async function fetchFunc(path) {
-    try {
-      const response = await fetch(path);
-      if (response.ok) {
-        const result = await response.json();
-        console.log({ result });
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  fetchFunc("http://localhost:3000/todos");
-  fetchFunc("http://localhost:3000/todos/123");
-
-  console.log("JsonServerRequestExpamle");
-}
-
-jsonServerRequestExpamle();
+import "./scripts/api/todosApi.js"
