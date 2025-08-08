@@ -1,3 +1,3 @@
 export const featureFlag = {
-    todoDataSource: 'localstorage' // возможные значения localstorage или http
+    todoDataSource: 'localstorage' // что будет источником данных, возможные значения localstorage или http
 } 
