@@ -8,4 +8,3 @@ import "./scripts/theme/themeController.js";
 import "./scripts/filter/filterController.js";
 import "./scripts/list/listController.js";
 import "./scripts/search/searchController.js";
-import "./scripts/api/todosApi.js"

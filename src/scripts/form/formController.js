@@ -5,7 +5,7 @@ import * as model from "../todos/model.js";
 import * as renderLoading from "../loading/loadingView.js";
 
 async function initForm() {
-  await renderLoading.loadWithLoader(model.getTasksFromServer())
+  await renderLoading.loadWithLoader(model.loadAllTasks())
 
   formView.renderList(model.getTasks());
 

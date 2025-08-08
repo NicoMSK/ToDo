@@ -13,6 +13,7 @@ module.exports = {
     filename: 'index.[contenthash].js',
 	assetModuleFilename: "images/[name].[contenthash][ext]",
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
