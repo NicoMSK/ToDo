@@ -1,37 +1,41 @@
-import * as LocalStorage from '../utils/localStorage.js';
-import * as api from '../api/todosApi.js';
+import * as LocalStorage from "../utils/localStorage.js";
+import { getTodostSourceClient } from "./dataSource";
 
 const FILTER = {
   all: "all",
   complete: "complete",
-  incomplete: "incomplete"
+  incomplete: "incomplete",
 };
 
 const FILTER_LABELS = {
   all: "Все задачи",
   complete: "Завершены",
-  incomplete: "В работе"
+  incomplete: "В работе",
 };
+
+const todosSourceClient = getTodostSourceClient();
 
 let serverTodos = [];
 
-async function getTasksFromServer() {
-  serverTodos = await api.getTodos();
-};
+async function loadAllTasks() {
+  serverTodos = await todosSourceClient.getAll();
+}
 
 async function addTodo(newTaskTitle) {
   const newTask = {
     isComplete: false,
-    title: newTaskTitle
+    title: newTaskTitle,
   };
 
-  const serverTask = await api.createNewTodo(newTask);
+  const serverTask = await todosSourceClient.create(newTask);
   serverTodos.push(serverTask);
-};
+}
 
 function getTaskIndex(itemId) {
-  return serverTodos.findIndex((todoInArray) => todoInArray.id === itemId);
-};
+  return serverTodos.findIndex(
+    (todoInArray) => todoInArray.id === itemId
+  );
+}
 
 let lastDeletedTask = null;
 let lastDeletedTaskIndex = -1;
@@ -41,14 +45,14 @@ function stopTimer() {
   if (deleteTimeoutId) {
     clearTimeout(deleteTimeoutId);
     deleteTimeoutId = null;
-  };
-};
+  }
+}
 
 function deleteTaskByTimer(promise) {
   return setTimeout(async () => {
     await promise();
   }, 5000);
-};
+}
 
 async function deleteTask(itemId) {
   lastDeletedTaskIndex = getTaskIndex(itemId);
@@ -57,24 +61,25 @@ async function deleteTask(itemId) {
 
   lastDeletedTask = serverTodos.splice(lastDeletedTaskIndex, 1)[0];
 
-  deleteTimeoutId = deleteTaskByTimer(
-    () => api.deleteTodo(String(itemId)));
-};
+  deleteTimeoutId = deleteTaskByTimer(() =>
+    todosSourceClient.delete(String(itemId))
+  );
+}
 
 async function returnLastDeletedTask() {
   if (lastDeletedTask && lastDeletedTaskIndex !== -1) {
-    stopTimer()
+    stopTimer();
     serverTodos.splice(lastDeletedTaskIndex, 0, lastDeletedTask);
-  };
-};
+  }
+}
 
 function isEmptyTodos() {
-  return serverTodos.length === 0
-};
+  return serverTodos.length === 0;
+}
 
 function getTaskById(itemId) {
   return serverTodos.find((item) => item.id === itemId);
-};
+}
 
 async function updateTaskProperty({ itemId, property, title }) {
   const task = getTaskById(itemId);
@@ -86,24 +91,25 @@ async function updateTaskProperty({ itemId, property, title }) {
     case "title":
       task.title = title;
       break;
-  };
+  }
 
-  await api.editTodo(String(itemId), task)
-};
+  await todosSourceClient.edit(String(itemId), task);
+}
 
-let currentFilterValue = LocalStorage.filterLocalStorageService.getLocalStorage();
+let currentFilterValue =
+  LocalStorage.filterLocalStorageService.getLocalStorage();
 
 function setCurrentFilterValue(value) {
   if (value in FILTER) {
     currentFilterValue = value;
 
     LocalStorage.filterLocalStorageService.setLocalStorage(currentFilterValue);
-  };
-};
+  }
+}
 
 function getCurrentFilterValue() {
   return currentFilterValue;
-};
+}
 
 function doesTaskMatchFilter(task) {
   switch (currentFilterValue) {
@@ -114,42 +120,56 @@ function doesTaskMatchFilter(task) {
     case FILTER.all:
       return true;
     default:
-      throw new Error("Получен фильтр, которого нет")
-  };
-};
+      throw new Error("Получен фильтр, которого нет");
+  }
+}
 
 let currentSearchText = "";
 
 function setCurrentSearchText(searchText) {
   currentSearchText = searchText.toLowerCase().trim();
-};
+}
 
 function filterTaskByTitle(task) {
   return task.title.toLocaleLowerCase().includes(currentSearchText);
-};
+}
 
 function isStringNotEmpty() {
   return currentSearchText.trim() !== "";
-};
+}
 
 function getTasks() {
-  return serverTodos.filter(task => {
+  return serverTodos.filter((task) => {
     const isComleteFilterResult = doesTaskMatchFilter(task);
     let titleFilterResult = true;
 
     if (isStringNotEmpty()) {
-      titleFilterResult = filterTaskByTitle(task)
-    };
+      titleFilterResult = filterTaskByTitle(task);
+    }
 
     return titleFilterResult && isComleteFilterResult;
-  }
-  );
-};
+  });
+}
 
 function validateTitle(title) {
   return title.trim() !== "";
+}
+
+export {
+  isEmptyTodos,
+  loadAllTasks,
+  addTodo,
+  deleteTask,
+  getTaskById,
+  doesTaskMatchFilter,
+  setCurrentFilterValue,
+  getCurrentFilterValue,
+  currentFilterValue,
+  FILTER,
+  FILTER_LABELS,
+  updateTaskProperty,
+  validateTitle,
+  returnLastDeletedTask,
+  setCurrentSearchText,
+  getTasks,
 };
-
-export { isEmptyTodos, getTasksFromServer, addTodo, deleteTask, getTaskById, doesTaskMatchFilter, setCurrentFilterValue, getCurrentFilterValue, currentFilterValue, FILTER, FILTER_LABELS, updateTaskProperty, validateTitle, returnLastDeletedTask, setCurrentSearchText, getTasks };
-
-

@@ -1,8 +1,8 @@
-const TODOS_LOCAL_STORAGE_KEY = "todos";
+export const TODOS_LOCAL_STORAGE_KEY = "todos";
 const THEME_LOCAL_STORAGE_KEY = "THEME_LOCAL_STORAGE_KEY";
 const FILTER_LOCAL_STORAGE_KEY = "FILTER_LOCAL_STORAGE_KEY";
 
-class LocalStorageService {
+export class LocalStorageService {
   constructor(key, defaultValue) {
     this.key = key;
     this.defaultValue = defaultValue;
@@ -45,8 +45,6 @@ class LocalStorageService {
     return result;
   }
 };
-
-export const todosLocalStorageService = new LocalStorageService(TODOS_LOCAL_STORAGE_KEY, []);
 
 export const themeLocalStorageService = new LocalStorageService(THEME_LOCAL_STORAGE_KEY, "light");
 
