@@ -11,7 +11,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'index.[contenthash].js',
-	assetModuleFilename: "images/[name].[contenthash][ext]",
+    assetModuleFilename: "images/[name].[contenthash][ext]",
+    publicPath: './',
   },
   devtool: 'inline-source-map',
   module: {
